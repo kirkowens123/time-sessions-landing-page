@@ -111,7 +111,7 @@
 
                 <h2 class="mt-10 text-xl font-bold text-gray-900">Contact</h2>
                 <p class="mt-3 text-gray-700">If you have questions about these terms, contact us at:</p>
-                <p class="mt-2"><a class="text-primary hover:text-primary-dark font-medium" href="mailto:kirkowenscodes@gmail.com">kirkowenscodes@gmail.com</a></p>
+                <p class="mt-2"><a class="text-primary hover:text-primary-dark font-medium cursor-pointer" onclick="copyEmail(this, 'kirkowenscodes@gmail.com')">kirkowenscodes@gmail.com</a><span class="ml-2 text-green-600 text-sm font-medium hidden">Copied!</span></p>
 
                 <div class="mt-10">
                     <a href="./" class="inline-flex items-center justify-center bg-gray-900 hover:bg-black text-white px-6 py-3 rounded-xl font-semibold transition">Back to home</a>
@@ -127,5 +127,16 @@
             </div>
         </div>
     </footer>
+    <script>
+        function copyEmail(el, email) {
+            navigator.clipboard.writeText(email).then(function() {
+                var badge = el.nextElementSibling;
+                badge.classList.remove('hidden');
+                setTimeout(function() {
+                    badge.classList.add('hidden');
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
