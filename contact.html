@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Support - Tivvity</title>
+    <meta name="description" content="Get in touch with Tivvity support">
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B5CF6',
+                        'primary-dark': '#7C3AED',
+                        'dark-bg': '#0D0D12',
+                        'dark-card': '#1A1A24',
+                        'dark-border': '#2D2D3D',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0D0D12;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(180deg, #0D0D12 0%, #1A1A24 100%);
+        }
+
+        .contact-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="fixed w-full backdrop-blur-md z-50 border-b border-dark-border" style="background-color: rgba(13, 13, 18, 0.8); left: 0; right: 0;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="./" class="flex items-center space-x-2 hover:opacity-80 transition">
+                    <img src="./logo.svg" alt="Tivvity" class="w-8 h-8">
+                    <span class="text-xl font-bold text-white">Tivvity</span>
+                </a>
+                <div class="flex items-center space-x-6">
+                    <a href="./#download" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-medium transition">Download</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero-gradient pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">Contact Support</h1>
+                <p class="text-xl text-gray-400">We're here to help! Get in touch with us.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Email Support Card -->
+                <div class="contact-card bg-dark-card rounded-2xl shadow-2xl p-8 border-2 border-dark-border">
+                    <div class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-3">Email Support</h2>
+                    <p class="text-gray-300 mb-6">Send us an email and we'll get back to you as soon as possible.</p>
+                    <a href="mailto:support@tivvity.com" class="inline-flex items-center justify-center w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl font-semibold transition">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        support@tivvity.com
+                    </a>
+                </div>
+
+                <!-- FAQ Card -->
+                <div class="contact-card bg-dark-card rounded-2xl shadow-2xl p-8 border-2 border-dark-border">
+                    <div class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-3">Quick Help</h2>
+                    <p class="text-gray-300 mb-6">Looking for quick answers? Check out our common questions below.</p>
+                    <a href="#faq" class="inline-flex items-center justify-center w-full bg-dark-bg hover:bg-dark-border text-white px-6 py-3 rounded-xl font-semibold transition border-2 border-dark-border">
+                        View FAQ
+                    </a>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div id="faq" class="bg-dark-card rounded-3xl shadow-2xl p-8 sm:p-10 border-2 border-dark-border">
+                <h2 class="text-3xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
+                
+                <div class="space-y-6">
+                    <!-- FAQ Item 1 -->
+                    <div class="border-b border-dark-border pb-6">
+                        <h3 class="text-xl font-bold text-white mb-3">How do I manage my subscription?</h3>
+                        <p class="text-gray-300">You can manage your subscription through your device Settings > Apple ID > Subscriptions. From there, you can cancel, upgrade, or modify your subscription at any time.</p>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="border-b border-dark-border pb-6">
+                        <h3 class="text-xl font-bold text-white mb-3">Is my data private and secure?</h3>
+                        <p class="text-gray-300">Yes! All your time tracking data is stored locally on your device. We don't collect or transmit your personal information to external servers. Read our <a href="./privacy" class="text-primary hover:text-primary-dark font-medium">Privacy Policy</a> for more details.</p>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="border-b border-dark-border pb-6">
+                        <h3 class="text-xl font-bold text-white mb-3">Can I export my data?</h3>
+                        <p class="text-gray-300">Yes! Pro users can export their time tracking data as a CSV file at any time. This gives you full control over your information.</p>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="border-b border-dark-border pb-6">
+                        <h3 class="text-xl font-bold text-white mb-3">What's the difference between the free and Pro versions?</h3>
+                        <p class="text-gray-300">The free version includes unlimited categories, activities, and current time period views. Pro features include historical views (Month, Year, All-time) for dashboard and goals pages as well as data export functionality.</p>
+                    </div>
+
+                    <!-- FAQ Item 5 -->
+                    <div class="border-b border-dark-border pb-6">
+                        <h3 class="text-xl font-bold text-white mb-3">How do I get a refund?</h3>
+                        <p class="text-gray-300">All purchases are processed through Apple. To request a refund, visit <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary-dark font-medium">reportaproblem.apple.com</a> and follow Apple's refund process.</p>
+                    </div>
+
+                    <!-- FAQ Item 6 -->
+                    <div class="pb-6">
+                        <h3 class="text-xl font-bold text-white mb-3">I found a bug or have a feature request</h3>
+                        <p class="text-gray-300">We'd love to hear from you! Please email us at <a href="mailto:support@tivvity.com" class="text-primary hover:text-primary-dark font-medium">support@tivvity.com</a> with details about the bug or your feature idea.</p>
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-8 border-t border-dark-border text-center">
+                    <p class="text-gray-400 mb-4">Still have questions?</p>
+                    <a href="mailto:support@tivvity.com" class="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-xl font-semibold transition">
+                        Contact Support
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <a href="./" class="inline-flex items-center justify-center bg-dark-card hover:bg-dark-border text-white px-6 py-3 rounded-xl font-semibold transition border-2 border-dark-border">Back to home</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark-bg border-t border-dark-border text-white py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2026 Tivvity. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                if (href === '#') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
