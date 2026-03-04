@@ -116,7 +116,7 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
                     <a href="#how-it-works" class="text-gray-300 hover:text-white transition">How It Works</a>
-                    <a href="#download" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-medium transition">Download</a>
+                    <a href="#download" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-medium transition">Get Early Access</a>
                 </div>
                 <button class="md:hidden text-gray-300">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,25 +137,33 @@
                         <span class="gradient-text">Achieve Your Goals</span>
                     </h1>
                     <p class="text-xl text-gray-300 mb-8 max-w-2xl">
-                        A beautiful, intuitive time tracking app that helps you understand how you spend your time and build better habits.
+                        A beautiful, intuitive time tracking app that helps you understand how you spend your time and build better habits. Join our early access program and start testing today!
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <div class="bg-primary/20 border-2 border-primary text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center space-x-3">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
-                            </svg>
-                            <span>Coming Soon on the App Store</span>
+                    <form id="waitlist-form" class="mx-auto lg:mx-0 mb-6">
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="Enter your email" 
+                                required
+                                class="flex-1 px-6 py-4 rounded-xl bg-dark-card border-2 border-dark-border text-white placeholder-gray-400 focus:outline-none focus:border-primary transition"
+                            >
+                            <button 
+                                type="submit" 
+                                class="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-semibold text-lg transition whitespace-nowrap"
+                            >
+                                Get Early Access
+                            </button>
                         </div>
-                        <a href="#features" class="bg-dark-card hover:bg-dark-border text-white px-8 py-4 rounded-xl font-semibold text-lg transition border-2 border-dark-border">
-                            Learn More
-                        </a>
-                    </div>
+                        <p id="form-message" class="mt-3 text-sm text-gray-400"></p>
+                    </form>
                     <div class="mt-8 flex items-center justify-center lg:justify-start space-x-6 text-sm text-gray-400">
                         <div class="flex items-center space-x-2">
                             <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            <span>Available on iOS</span>
+                            <span>Early Access on iOS</span>
                         </div>
                         <div class="flex items-center space-x-2">
                             <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
@@ -401,18 +409,28 @@
     <section id="download" class="py-20 px-4 sm:px-6 lg:px-8 gradient-bg">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Ready to Take Control of Your Time?</h2>
-            <p class="text-xl text-white/90 mb-10">Tivvity is coming soon to the App Store</p>
+            <p class="text-xl text-white/90 mb-10">Join our early access program and get instant access to test Tivvity on iOS</p>
             
-            <div class="flex flex-col items-center justify-center mb-12">
-                <div class="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-12 py-6 rounded-2xl font-semibold text-lg flex items-center justify-center space-x-3">
-                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
-                    </svg>
-                    <span class="text-xl">Coming Soon on the App Store</span>
+            <form id="waitlist-form-cta" class="max-w-lg mx-auto mb-8">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        required
+                        class="flex-1 px-6 py-4 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/60 focus:outline-none focus:border-white transition"
+                    >
+                    <button 
+                        type="submit" 
+                        class="bg-white hover:bg-gray-100 text-primary px-8 py-4 rounded-xl font-semibold text-lg transition whitespace-nowrap"
+                    >
+                        Get Early Access
+                    </button>
                 </div>
-            </div>
+                <p id="form-message-cta" class="mt-3 text-sm text-white/80"></p>
+            </form>
             
-            <p class="text-white/80 text-sm">Available on iOS • Privacy-focused time tracking</p>
+            <p class="text-white/80 text-sm">Early access via TestFlight • Privacy-focused time tracking</p>
         </div>
     </section>
 
@@ -459,8 +477,9 @@
                             <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            <span>Coming Soon</span>
+                            <span>Early Access Available</span>
                         </li>
+                        <li><a href="#download" class="hover:text-white transition">Get Early Access</a></li>
                     </ul>
                 </div>
             </div>
@@ -494,6 +513,67 @@
                     }
                 }
             });
+        });
+
+        // Waitlist form handlers
+        async function handleWaitlistSubmit(e, formId, messageId) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const emailInput = form.querySelector('input[type="email"]');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const messageElement = document.getElementById(messageId);
+            const email = emailInput.value;
+
+            // Disable button during submission
+            submitButton.disabled = true;
+            submitButton.textContent = 'Joining...';
+
+            try {
+                // Add contact to Brevo list via serverless function (triggers automation to send TestFlight link)
+                const response = await fetch('/.netlify/functions/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email
+                    })
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    messageElement.textContent = "🎉 Success! Check your email for your TestFlight link to start testing Tivvity.";
+                    messageElement.style.color = '#8B5CF6';
+                    
+                    // Reset form
+                    form.reset();
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                // Show error message
+                messageElement.textContent = 'Something went wrong. Please try again or email us directly at support@tivvity.com';
+                messageElement.style.color = '#EF4444';
+            } finally {
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Join Waitlist';
+
+                // Clear message after 8 seconds
+                setTimeout(() => {
+                    messageElement.textContent = '';
+                }, 8000);
+            }
+        }
+
+        // Attach handlers to both forms
+        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+            handleWaitlistSubmit(e, 'waitlist-form', 'form-message');
+        });
+
+        document.getElementById('waitlist-form-cta').addEventListener('submit', function(e) {
+            handleWaitlistSubmit(e, 'waitlist-form-cta', 'form-message-cta');
         });
     </script>
 </body>
