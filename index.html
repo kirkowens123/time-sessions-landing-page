@@ -131,15 +131,15 @@
     <section class="hero-gradient pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="text-center lg:text-left">
+                <div class="text-center lg:text-left order-2 lg:order-1">
                     <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-                        <span class="gradient-text">Own Your Time</span>
+                        <span class="gradient-text">Where Did Your Time Go?</span>
                     </h1>
-                    <p class="text-xl text-gray-300 mb-4 max-w-2xl">
-                        Most people don't know where their time goes.
+                    <p class="text-2xl text-gray-200 mb-4 max-w-2xl mx-auto lg:mx-0">
+                        Tivvity shows you your life in data.
                     </p>
-                    <p class="text-xl text-gray-300 mb-6 max-w-2xl">
-                        Tivvity shows you your life in data. Track activities, visualize your time, and build better habits.
+                    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Track your time. See the patterns. Change your habits.
                     </p>
                     <form id="waitlist-form" class="mx-auto lg:mx-0 mb-6">
                         <div class="flex flex-col sm:flex-row gap-3">
@@ -155,34 +155,38 @@
                                 type="submit" 
                                 class="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-semibold text-lg transition whitespace-nowrap"
                             >
-                                Get Early Access
+                                Start Tracking Today
                             </button>
                         </div>
                         <p id="form-message" class="mt-3 text-sm text-gray-400"></p>
                     </form>
                     <p class="text-sm text-gray-400 mt-2">Enter email → receive TestFlight link → install in 60 seconds</p>
-                    <div class="mt-8 flex items-center justify-center lg:justify-start space-x-6 text-sm text-gray-400">
-                        <div class="flex items-center space-x-2">
-                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
-                            <span>Early Access on iOS</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
-                            <span>No account required</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
-                            <span>Privacy focused</span>
+                    <!-- Privacy-First Callout -->
+                    <div class="mt-8 bg-dark-card/50 backdrop-blur-sm border-2 border-primary/30 rounded-2xl p-6 max-w-md mx-auto lg:mx-0">
+                        <h3 class="text-lg font-bold text-white mb-3">Privacy-First Design</h3>
+                        <div class="space-y-2 text-gray-300">
+                            <p class="flex items-center">
+                                <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                No account. No cloud.
+                            </p>
+                            <p class="flex items-center">
+                                <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                Your data stays on your phone.
+                            </p>
+                            <p class="flex items-center">
+                                <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                Works completely offline.
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="relative animate-float">
+                <div class="relative animate-float order-1 lg:order-2">
                     <div class="phone-mockup mx-auto">
                         <div class="phone-notch"></div>
                         <div class="phone-screen">
@@ -245,33 +249,54 @@
     <!-- Problem Section -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl sm:text-5xl font-bold text-white mb-8">Most people have no idea where their time goes.</h2>
+            <h2 class="text-4xl sm:text-5xl font-bold text-white mb-8">Your time is disappearing.</h2>
             <div class="space-y-6 text-xl text-gray-300 mb-12">
                 <p>You think you worked 6 hours.<br/>You think you studied 3 hours.</p>
-                <p class="text-2xl font-semibold text-white">But when you track it, the reality is different.</p>
-                <p>Tivvity helps you understand your time and build the life you want.</p>
+                <p class="text-2xl font-semibold text-white">Most people misjudge their day by 2-4 hours.</p>
+                <p>Tivvity shows you the truth—so you can take back control.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">What early users say</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-dark-bg p-6 rounded-2xl border-2 border-dark-border">
+                    <p class="text-gray-300 mb-4 italic">"I finally realized I was spending 4 hours a day on my phone. Game changer."</p>
+                    <p class="text-sm text-gray-400">— Early tester</p>
+                </div>
+                <div class="bg-dark-bg p-6 rounded-2xl border-2 border-dark-border">
+                    <p class="text-gray-300 mb-4 italic">"I thought I worked 8 hours. It was actually 4. Now I know where my time goes."</p>
+                    <p class="text-sm text-gray-400">— Beta user</p>
+                </div>
+                <div class="bg-dark-bg p-6 rounded-2xl border-2 border-dark-border">
+                    <p class="text-gray-300 mb-4 italic">"The privacy-first approach is exactly what I needed. No cloud, no tracking."</p>
+                    <p class="text-sm text-gray-400">— iOS tester</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Who It's For Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">Who is Tivvity for?</h2>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">Who Tivvity helps most</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="text-center">
-                    <div class="text-4xl mb-4">🧠</div>
-                    <h3 class="text-xl font-bold text-white mb-3">ADHD brains who lose track of the day</h3>
-                    <p class="text-gray-400">Get concrete data on where your time actually went</p>
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Students who want to see where their time goes</h3>
+                    <p class="text-gray-400">Get concrete data on study hours vs distractions</p>
                 </div>
                 <div class="text-center">
                     <div class="text-4xl mb-4">💼</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Founders & students who want proof</h3>
+                    <h3 class="text-xl font-bold text-white mb-3">Founders who want proof of how they spend their day</h3>
                     <p class="text-gray-400">See exactly where your hours are going</p>
                 </div>
                 <div class="text-center">
                     <div class="text-4xl mb-4">🎯</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Habit-builders who want real data</h3>
+                    <h3 class="text-xl font-bold text-white mb-3">Anyone trying to build habits with real data</h3>
                     <p class="text-gray-400">Track streaks and goals with actual time metrics</p>
                 </div>
             </div>
@@ -279,7 +304,7 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
+    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">Everything You Need</h2>
@@ -521,7 +546,7 @@
                         type="submit" 
                         class="bg-white hover:bg-gray-100 text-primary px-8 py-4 rounded-xl font-semibold text-lg transition whitespace-nowrap"
                     >
-                        Get Early Access
+                        Join Early Access
                     </button>
                 </div>
                 <p id="form-message-cta" class="mt-3 text-sm text-white/80"></p>
