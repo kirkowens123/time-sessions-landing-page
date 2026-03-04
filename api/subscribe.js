@@ -1,21 +1,15 @@
-exports.handler = async (event, context) => {
+export default async function handler(req, res) {
   // Only allow POST requests
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' })
-    };
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { email } = JSON.parse(event.body);
+    const { email } = req.body;
 
     // Validate email
     if (!email || !email.includes('@')) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Valid email is required' })
-      };
+      return res.status(400).json({ error: 'Valid email is required' });
     }
 
     // Add contact to Brevo
@@ -37,19 +31,13 @@ exports.handler = async (event, context) => {
 
     if (response.ok || response.status === 400) {
       // 400 might mean contact already exists, which is fine
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ success: true, message: 'Successfully subscribed!' })
-      };
+      return res.status(200).json({ success: true, message: 'Successfully subscribed!' });
     } else {
       throw new Error(data.message || 'Failed to subscribe');
     }
 
   } catch (error) {
     console.error('Subscription error:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to subscribe. Please try again.' })
-    };
+    return res.status(500).json({ error: 'Failed to subscribe. Please try again.' });
   }
-};
+}

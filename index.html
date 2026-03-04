@@ -531,7 +531,7 @@
 
             try {
                 // Add contact to Brevo list via serverless function (triggers automation to send TestFlight link)
-                const response = await fetch('/.netlify/functions/subscribe', {
+                const response = await fetch('/api/subscribe', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
