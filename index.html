@@ -114,8 +114,8 @@
                     <span class="text-xl font-bold text-white">Tivvity</span>
                 </a>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
                     <a href="#how-it-works" class="text-gray-300 hover:text-white transition">How It Works</a>
+                    <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
                     <a href="#download" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-medium transition">Get Early Access</a>
                 </div>
                 <button class="md:hidden text-gray-300">
@@ -132,16 +132,13 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="text-center lg:text-left order-2 lg:order-1">
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-8">
                         <span class="gradient-text">Where Did Your Time Go?</span>
                     </h1>
-                    <p class="text-2xl text-gray-200 mb-4 max-w-2xl mx-auto lg:mx-0">
-                        Tivvity shows you your life in data.
+                    <p class="text-2xl text-gray-200 mb-10 max-w-2xl mx-auto lg:mx-0">
+                        Visualize what you spend time on. Notice patterns. Create goals.
                     </p>
-                    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
-                        Track your time. See the patterns. Change your habits.
-                    </p>
-                    <form id="waitlist-form" class="mx-auto lg:mx-0 mb-6">
+                    <form id="waitlist-form" class="max-w-2xl mx-auto lg:mx-0 mb-4">
                         <div class="flex flex-col sm:flex-row gap-3">
                             <input 
                                 type="email" 
@@ -149,7 +146,7 @@
                                 name="email" 
                                 placeholder="Enter your email" 
                                 required
-                                class="flex-1 px-6 py-4 rounded-xl bg-dark-card border-2 border-dark-border text-white placeholder-gray-400 focus:outline-none focus:border-primary transition"
+                                class="flex-[2] px-6 py-4 rounded-xl bg-dark-card border-2 border-dark-border text-white placeholder-gray-400 focus:outline-none focus:border-primary transition"
                             >
                             <button 
                                 type="submit" 
@@ -249,62 +246,126 @@
     <!-- Problem Section -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl sm:text-5xl font-bold text-white mb-8">Your time is disappearing.</h2>
+            <h2 class="text-4xl sm:text-5xl font-bold text-white mb-8">I've been using the app<br/>for 3 months now</h2>
             <div class="space-y-6 text-xl text-gray-300 mb-12">
-                <p>You think you worked 6 hours.<br/>You think you studied 3 hours.</p>
-                <p class="text-2xl font-semibold text-white">Most people misjudge their day by 2-4 hours.</p>
-                <p>Tivvity shows you the truth—so you can take back control.</p>
+                <p class="text-2xl font-semibold text-white">And I actually know where all my time is going.</p>
+                <p>When you start logging time, you notice patterns and can create goals <br/> for your categories and activities.</p>
+                <p>Now you can keep track of what you're doing, how long, and where your time <br/> is actually spent.</p>
             </div>
         </div>
     </section>
 
-    <!-- Social Proof Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">What early users say</h2>
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">How It Works</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Get started in three simple steps</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <span class="text-3xl font-bold text-white">1</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Select Category & Activity</h3>
+                    <p class="text-gray-400">Choose from your categories and activities, just like a calendar. Simple and organized.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <span class="text-3xl font-bold text-white">2</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Assign Time</h3>
+                    <p class="text-gray-400">Enter how long you spent on that activity. Quick and easy.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <span class="text-3xl font-bold text-white">3</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Visualize & Create Goals</h3>
+                    <p class="text-gray-400">See what you spend time on in your dashboard. Notice patterns and create goals for your categories and activities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">Visualize Your Time</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">See exactly what you spend time on with charts and insights</p>
+            </div>
+            
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-dark-bg p-6 rounded-2xl border-2 border-dark-border">
-                    <p class="text-gray-300 mb-4 italic">"I finally realized I was spending 4 hours a day on my phone. Game changer."</p>
-                    <p class="text-sm text-gray-400">— Early tester</p>
+                <div class="text-center">
+                    <div class="phone-mockup mx-auto mb-6" style="width: 250px; height: 500px;">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <img src="./calendar.png" alt="Calendar" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="w-full h-full bg-dark-card flex items-center justify-center" style="display: none;">
+                                <span class="text-6xl">�</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Track What You're Doing</h3>
+                    <p class="text-gray-400">Keep track of what you're doing, how long, and where your time is actually spent</p>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-2xl border-2 border-dark-border">
-                    <p class="text-gray-300 mb-4 italic">"I thought I worked 8 hours. It was actually 4. Now I know where my time goes."</p>
-                    <p class="text-sm text-gray-400">— Beta user</p>
+                <div class="text-center">
+                    <div class="phone-mockup mx-auto mb-6" style="width: 250px; height: 500px;">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <img src="./dashboard.png" alt="Dashboard" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="w-full h-full bg-dark-card flex items-center justify-center" style="display: none;">
+                                <span class="text-6xl">📊</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">See Your Patterns</h3>
+                    <p class="text-gray-400">Visualize what you spend time on in your dashboard</p>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-2xl border-2 border-dark-border">
-                    <p class="text-gray-300 mb-4 italic">"The privacy-first approach is exactly what I needed. No cloud, no tracking."</p>
-                    <p class="text-sm text-gray-400">— iOS tester</p>
+                <div class="text-center">
+                    <div class="phone-mockup mx-auto mb-6" style="width: 250px; height: 500px;">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <img src="./goals.png" alt="Goals" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="w-full h-full bg-dark-card flex items-center justify-center" style="display: none;">
+                                <span class="text-6xl">🎯</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Create Goals</h3>
+                    <p class="text-gray-400">Set goals for your categories and activities</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Who It's For Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">Who Tivvity helps most</h2>
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12">Who Tivvity helps most</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="text-center">
                     <div class="text-4xl mb-4">📚</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Students who want to see where their time goes</h3>
-                    <p class="text-gray-400">Get concrete data on study hours vs distractions</p>
+                    <h3 class="text-xl font-bold text-white">Students who want to see where their time goes</h3>
                 </div>
                 <div class="text-center">
                     <div class="text-4xl mb-4">💼</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Founders who want proof of how they spend their day</h3>
-                    <p class="text-gray-400">See exactly where your hours are going</p>
+                    <h3 class="text-xl font-bold text-white">Founders who want proof of how they spend their day</h3>
                 </div>
                 <div class="text-center">
                     <div class="text-4xl mb-4">🎯</div>
-                    <h3 class="text-xl font-bold text-white mb-3">Anyone trying to build habits with real data</h3>
-                    <p class="text-gray-400">Track streaks and goals with actual time metrics</p>
+                    <h3 class="text-xl font-bold text-white">Anyone trying to build habits with real data</h3>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
+    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">Everything You Need</h2>
@@ -316,6 +377,17 @@
                 <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg">
                     <div class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Quick Time Entry</h3>
+                    <p class="text-gray-400">Log time in seconds with our streamlined quick add modal. Select your category and activity, enter your time, and you're done.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg">
+                    <div class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                         </svg>
                     </div>
@@ -323,7 +395,7 @@
                     <p class="text-gray-400">Colorful bar charts and pie charts that show your progress at a glance. View Day, Week, Month, Year & All-time statistics.</p>
                 </div>
 
-                <!-- Feature 2 -->
+                <!-- Feature 3 -->
                 <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg">
                     <div class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -332,17 +404,6 @@
                     </div>
                     <h3 class="text-xl font-bold text-white mb-3">Calendar Visualization</h3>
                     <p class="text-gray-400">Visualize your time entries in a beautiful calendar interface with color-coded categories. See patterns and trends at a glance.</p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg">
-                    <div class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Quick Time Entry</h3>
-                    <p class="text-gray-400">Log time in seconds with our streamlined quick add modal. Select your category and activity, enter your time, and you're done.</p>
                 </div>
 
                 <!-- Feature 4 -->
@@ -376,94 +437,6 @@
                     </div>
                     <h3 class="text-xl font-bold text-white mb-3">Custom Categories</h3>
                     <p class="text-gray-400">Create unlimited custom categories with emojis, then organize activities within them. Make tracking personal and fun.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">How It Works</h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Get started in three simple steps</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <span class="text-3xl font-bold text-white">1</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Create Categories & Activities</h3>
-                    <p class="text-gray-400">Create categories with custom emojis, then add activities within each category. Organize your time tracking in a way that makes sense for you.</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-gradient-to-br from-primary to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <span class="text-3xl font-bold text-white">2</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Log Your Time</h3>
-                    <p class="text-gray-400">Use the quick add modal to select a category, choose an activity, and enter your time. Simple, fast, and intuitive.</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <span class="text-3xl font-bold text-white">3</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Achieve Your Goals</h3>
-                    <p class="text-gray-400">Monitor your progress with beautiful visualizations, set goals, and get insights to help you build better habits.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Screenshots Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">Beautiful Dark Design</h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">A thoughtfully crafted interface with stunning dark mode that makes time tracking a pleasure</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="phone-mockup mx-auto mb-6" style="width: 250px; height: 500px;">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <img src="./dashboard.png" alt="Dashboard" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="w-full h-full bg-dark-card flex items-center justify-center" style="display: none;">
-                                <span class="text-6xl">📊</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Dashboard</h3>
-                    <p class="text-gray-400">Track progress with colorful bar charts</p>
-                </div>
-                <div class="text-center">
-                    <div class="phone-mockup mx-auto mb-6" style="width: 250px; height: 500px;">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <img src="./goals.png" alt="Goals" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="w-full h-full bg-dark-card flex items-center justify-center" style="display: none;">
-                                <span class="text-6xl">🎯</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Goals</h3>
-                    <p class="text-gray-400">Set and track time, frequency & streak goals</p>
-                </div>
-                <div class="text-center">
-                    <div class="phone-mockup mx-auto mb-6" style="width: 250px; height: 500px;">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <img src="./calendar.png" alt="Calendar" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="w-full h-full bg-dark-card flex items-center justify-center" style="display: none;">
-                                <span class="text-6xl">📅</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Calendar View</h3>
-                    <p class="text-gray-400">Visualize your time in an intuitive calendar</p>
                 </div>
             </div>
         </div>
@@ -528,28 +501,28 @@
     </section>
 
     <!-- CTA Section -->
-    <section id="download" class="py-20 px-4 sm:px-6 lg:px-8 gradient-bg">
+    <section id="download" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Ready to Take Control of Your Time?</h2>
             <p class="text-xl text-white/90 mb-10">Get instant access to test Tivvity on iOS</p>
             
-            <form id="waitlist-form-cta" class="max-w-lg mx-auto mb-8">
+            <form id="waitlist-form-cta" class="max-w-2xl mx-auto mb-8">
                 <div class="flex flex-col sm:flex-row gap-3">
                     <input 
                         type="email" 
                         name="email" 
                         placeholder="Enter your email" 
                         required
-                        class="flex-1 px-6 py-4 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/60 focus:outline-none focus:border-white transition"
+                        class="flex-[2] px-6 py-4 rounded-xl bg-dark-card border-2 border-dark-border text-white placeholder-gray-400 focus:outline-none focus:border-primary transition"
                     >
                     <button 
                         type="submit" 
-                        class="bg-white hover:bg-gray-100 text-primary px-8 py-4 rounded-xl font-semibold text-lg transition whitespace-nowrap"
+                        class="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-semibold text-lg transition whitespace-nowrap"
                     >
                         Join Early Access
                     </button>
                 </div>
-                <p id="form-message-cta" class="mt-3 text-sm text-white/80"></p>
+                <p id="form-message-cta" class="mt-3 text-sm text-gray-400"></p>
             </form>
             <p class="text-white/90 text-base mb-2">Enter email → receive TestFlight link → install in 60 seconds</p>
             
