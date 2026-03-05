@@ -603,57 +603,59 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-bg border-t border-dark-border text-white py-12 px-4 sm:px-6 lg:px-8">
+    <footer class="bg-dark-card border-t border-dark-border text-white py-16 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- Column 1: Brand -->
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
-                        <img src="./logo.svg" alt="Tivvity" class="w-6 h-6">
-                        <span class="font-bold text-lg">Tivvity</span>
+                        <img src="./logo.svg" alt="Tivvity" class="w-8 h-8">
+                        <span class="font-bold text-xl">Tivvity</span>
                     </div>
-                    <p class="text-gray-400 text-sm">Track your time, achieve your goals, and build better habits.</p>
+                    <p class="text-gray-400 text-sm mb-4">See where your life actually goes.</p>
+                    <p class="text-gray-400 text-sm mb-4">Privacy-first time tracking for understanding how you spend your time.</p>
+                    <p class="text-gray-400 text-sm mb-4">Built by an independent developer.</p>
+                    <div class="flex items-center text-sm text-gray-400 mt-4">
+                        <svg class="w-4 h-4 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Privacy-first • No account required</span>
+                    </div>
                 </div>
                 
+                <!-- Column 2: Product -->
                 <div>
-                    <h4 class="font-semibold mb-4">Product</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#features" class="hover:text-white transition">Features</a></li>
+                    <h4 class="font-semibold mb-4 text-white">Product</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
                         <li><a href="#how-it-works" class="hover:text-white transition">How It Works</a></li>
-                        <li><a href="#download" class="hover:text-white transition">Download</a></li>
+                        <li><a href="#features" class="hover:text-white transition">Features</a></li>
+                        <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href="#download" class="hover:text-white transition">Join Early Access</a></li>
                     </ul>
                 </div>
                 
+                <!-- Column 3: Legal -->
                 <div>
-                    <h4 class="font-semibold mb-4">Support</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="./contact" class="hover:text-white transition">Contact Support</a></li>
-                        <li><a href="./privacy" class="hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="./terms" class="hover:text-white transition">Terms of Service</a></li>
+                    <h4 class="font-semibold mb-4 text-white">Legal</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="./privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="./terms.html" class="hover:text-white transition">Terms of Use</a></li>
+                        <li><a href="mailto:support@tivvity.com" class="hover:text-white transition">Contact</a></li>
                     </ul>
                 </div>
                 
+                <!-- Column 4: Contact -->
                 <div>
-                    <h4 class="font-semibold mb-4">App</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li class="flex items-center space-x-2">
-                            <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
-                            <span>iOS Only</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
-                            <span>Early Access Available</span>
-                        </li>
-                        <li><a href="#download" class="hover:text-white transition">Get Early Access</a></li>
-                    </ul>
+                    <h4 class="font-semibold mb-4 text-white">Contact</h4>
+                    <p class="text-gray-400 text-sm mb-3">Questions or feedback?</p>
+                    <a href="mailto:support@tivvity.com" class="text-gray-400 text-sm hover:text-white transition">support@tivvity.com</a>
                 </div>
             </div>
             
+            <!-- Bottom Footer -->
             <div class="border-t border-dark-border pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2026 Tivvity. All rights reserved.</p>
+                <p>&copy; 2026 Tivvity</p>
+                <p class="mt-1">Built by Kirk Owens</p>
             </div>
         </div>
     </footer>
