@@ -142,6 +142,25 @@
                         Discover where your time actually goes.
                     </p>
                     <form id="waitlist-form" class="max-w-2xl mx-auto lg:mx-0 mb-4">
+                        <!-- Platform Selection Toggle -->
+                        <div class="flex w-full bg-dark-card border border-dark-border rounded-full p-1 mb-4">
+                            <button 
+                                type="button"
+                                id="platform-ios"
+                                class="platform-btn flex-1 px-6 py-2.5 rounded-full bg-primary text-white font-medium transition-all duration-200"
+                                data-platform="ios"
+                            >
+                                <span class="text-lg mr-1.5">📱</span> iPhone
+                            </button>
+                            <button 
+                                type="button"
+                                id="platform-android"
+                                class="platform-btn flex-1 px-6 py-2.5 rounded-full bg-transparent text-gray-400 font-medium transition-all duration-200 hover:text-gray-300"
+                                data-platform="android"
+                            >
+                                <span class="text-lg mr-1.5">🤖</span> Android
+                            </button>
+                        </div>
                         <div class="flex flex-col sm:flex-row gap-3">
                             <input 
                                 type="email" 
@@ -161,7 +180,7 @@
                         <p id="form-message" class="mt-3 text-sm text-gray-400"></p>
                     </form>
                     <div class="flex flex-col items-center lg:items-start gap-2 mt-4">
-                        <p class="text-sm text-gray-400">Get the TestFlight invite instantly.</p>
+                        <p class="text-sm text-gray-400" id="platform-message">Get the TestFlight invite instantly.</p>
                         <p class="text-sm text-white/80 font-medium">Join <span class="text-primary font-semibold">10 early users</span> testing Tivvity</p>
                     </div>
                     <!-- Privacy-First Callout -->
@@ -579,6 +598,25 @@
             <p class="text-xl text-white/90 mb-10">Join early access and help shape Tivvity.</p>
             
             <form id="waitlist-form-cta" class="max-w-2xl mx-auto mb-8">
+                <!-- Platform Selection Toggle -->
+                <div class="flex w-full bg-dark-card border border-dark-border rounded-full p-1 mb-4">
+                    <button 
+                        type="button"
+                        id="platform-ios-cta"
+                        class="platform-btn-cta flex-1 px-6 py-2.5 rounded-full bg-primary text-white font-medium transition-all duration-200"
+                        data-platform="ios"
+                    >
+                        <span class="text-lg mr-1.5">📱</span> iPhone
+                    </button>
+                    <button 
+                        type="button"
+                        id="platform-android-cta"
+                        class="platform-btn-cta flex-1 px-6 py-2.5 rounded-full bg-transparent text-gray-400 font-medium transition-all duration-200 hover:text-gray-300"
+                        data-platform="android"
+                    >
+                        <span class="text-lg mr-1.5">🤖</span> Android
+                    </button>
+                </div>
                 <div class="flex flex-col sm:flex-row gap-3">
                     <input 
                         type="email" 
@@ -596,7 +634,7 @@
                 </div>
                 <p id="form-message-cta" class="mt-3 text-sm text-gray-400"></p>
             </form>
-            <p class="text-white/90 text-base mb-2">Get the TestFlight invite instantly.</p>
+            <p class="text-white/90 text-base mb-2" id="platform-message-cta">Get the TestFlight invite instantly.</p>
             
             <p class="text-white/80 text-sm">Early access via TestFlight • No account required • Privacy-focused</p>
         </div>
@@ -661,6 +699,44 @@
     </footer>
 
     <script>
+        // Platform selection state
+        let selectedPlatform = 'ios'; // Default to iOS
+
+        // Platform button handlers
+        function setupPlatformButtons(btnClass, messageId) {
+            const buttons = document.querySelectorAll(`.${btnClass}`);
+            const messageElement = document.getElementById(messageId);
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const platform = this.getAttribute('data-platform');
+                    selectedPlatform = platform;
+                    
+                    // Update button styles for toggle appearance
+                    buttons.forEach(b => {
+                        if (b.getAttribute('data-platform') === platform) {
+                            b.classList.remove('bg-transparent', 'text-gray-400');
+                            b.classList.add('bg-primary', 'text-white');
+                        } else {
+                            b.classList.remove('bg-primary', 'text-white');
+                            b.classList.add('bg-transparent', 'text-gray-400');
+                        }
+                    });
+                    
+                    // Update message text
+                    if (platform === 'ios') {
+                        messageElement.textContent = 'Get the TestFlight invite instantly.';
+                    } else {
+                        messageElement.textContent = 'Get the Android beta link instantly.';
+                    }
+                });
+            });
+        }
+
+        // Setup platform buttons for both forms
+        setupPlatformButtons('platform-btn', 'platform-message');
+        setupPlatformButtons('platform-btn-cta', 'platform-message-cta');
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -700,20 +776,25 @@
             submitButton.textContent = 'Joining...';
 
             try {
-                // Add contact to Brevo list via serverless function (triggers automation to send TestFlight link)
+                // Add contact to Brevo list via serverless function
                 const response = await fetch('/api/subscribe', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        email: email
+                        email: email,
+                        platform: selectedPlatform
                     })
                 });
 
                 if (response.ok) {
-                    // Show success message
-                    messageElement.textContent = "🎉 Success! Check your email for your TestFlight link to start testing Tivvity.";
+                    // Show success message based on platform
+                    if (selectedPlatform === 'ios') {
+                        messageElement.textContent = "🎉 Success! Check your email for your TestFlight link to start testing Tivvity.";
+                    } else {
+                        messageElement.textContent = "🎉 Success! Check your email for your Android beta link to start testing Tivvity.";
+                    }
                     messageElement.style.color = '#8B5CF6';
                     
                     // Reset form
@@ -728,7 +809,7 @@
             } finally {
                 // Re-enable button
                 submitButton.disabled = false;
-                submitButton.textContent = 'Join Waitlist';
+                submitButton.textContent = 'Join Early Access';
 
                 // Clear message after 8 seconds
                 setTimeout(() => {

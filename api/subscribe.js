@@ -5,12 +5,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email } = req.body;
+    const { email, platform } = req.body;
 
     // Validate email
     if (!email || !email.includes('@')) {
       return res.status(400).json({ error: 'Valid email is required' });
     }
+
+    // Determine list ID based on platform
+    // List 5 = iOS (TestFlight)
+    // List 8 = Android (Beta)
+    const listId = platform === 'android' ? 8 : 5;
 
     // Add contact to Brevo
     const response = await fetch('https://api.brevo.com/v3/contacts', {
@@ -22,7 +27,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         email: email,
-        listIds: [5],
+        listIds: [listId],
         updateEnabled: false
       })
     });
