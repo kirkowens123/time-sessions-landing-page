@@ -699,18 +699,21 @@
     </footer>
 
     <script>
-        // Platform selection state
-        let selectedPlatform = 'ios'; // Default to iOS
+        // Platform selection state for each form
+        const platformState = {
+            hero: 'ios',
+            cta: 'ios'
+        };
 
         // Platform button handlers
-        function setupPlatformButtons(btnClass, messageId) {
+        function setupPlatformButtons(btnClass, messageId, formKey) {
             const buttons = document.querySelectorAll(`.${btnClass}`);
             const messageElement = document.getElementById(messageId);
             
             buttons.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const platform = this.getAttribute('data-platform');
-                    selectedPlatform = platform;
+                    platformState[formKey] = platform;
                     
                     // Update button styles for toggle appearance
                     buttons.forEach(b => {
@@ -734,8 +737,8 @@
         }
 
         // Setup platform buttons for both forms
-        setupPlatformButtons('platform-btn', 'platform-message');
-        setupPlatformButtons('platform-btn-cta', 'platform-message-cta');
+        setupPlatformButtons('platform-btn', 'platform-message', 'hero');
+        setupPlatformButtons('platform-btn-cta', 'platform-message-cta', 'cta');
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -762,7 +765,7 @@
         });
 
         // Waitlist form handlers
-        async function handleWaitlistSubmit(e, formId, messageId) {
+        async function handleWaitlistSubmit(e, formId, messageId, formKey) {
             e.preventDefault();
             
             const form = e.target;
@@ -770,6 +773,7 @@
             const submitButton = form.querySelector('button[type="submit"]');
             const messageElement = document.getElementById(messageId);
             const email = emailInput.value;
+            const platform = platformState[formKey];
 
             // Disable button during submission
             submitButton.disabled = true;
@@ -784,13 +788,13 @@
                     },
                     body: JSON.stringify({
                         email: email,
-                        platform: selectedPlatform
+                        platform: platform
                     })
                 });
 
                 if (response.ok) {
                     // Show success message based on platform
-                    if (selectedPlatform === 'ios') {
+                    if (platform === 'ios') {
                         messageElement.textContent = "🎉 Success! Check your email for your TestFlight link to start testing Tivvity.";
                     } else {
                         messageElement.textContent = "🎉 Success! Check your email for your Android beta link to start testing Tivvity.";
@@ -820,11 +824,11 @@
 
         // Attach handlers to both forms
         document.getElementById('waitlist-form').addEventListener('submit', function(e) {
-            handleWaitlistSubmit(e, 'waitlist-form', 'form-message');
+            handleWaitlistSubmit(e, 'waitlist-form', 'form-message', 'hero');
         });
 
         document.getElementById('waitlist-form-cta').addEventListener('submit', function(e) {
-            handleWaitlistSubmit(e, 'waitlist-form-cta', 'form-message-cta');
+            handleWaitlistSubmit(e, 'waitlist-form-cta', 'form-message-cta', 'cta');
         });
     </script>
 </body>
