@@ -145,13 +145,13 @@
                                 <span class="text-2xl font-semibold">App Store</span>
                             </div>
                         </a>
-                        <a href="https://play.google.com/apps/testing/com.kirkowens.TimeTracker" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-black border border-white/20 text-white px-6 py-3.5 rounded-xl transition hover:bg-gray-900">
+                        <button onclick="openBetaModal()" class="flex items-center gap-3 bg-black border border-white/20 text-white px-6 py-3.5 rounded-xl transition hover:bg-gray-900 cursor-pointer">
                             <img src="./google-play-image.png" alt="Google Play" class="w-8 h-8 flex-shrink-0">
                             <div class="flex flex-col leading-snug">
                                 <span class="text-xs uppercase tracking-wide text-gray-300">Get it on</span>
                                 <span class="text-2xl font-semibold">Google Play</span>
                             </div>
-                        </a>
+                        </button>
                     </div>
                     <div class="flex flex-col items-center lg:items-start gap-2 mt-4">
                         <p class="text-sm text-gray-400">Available now on iOS and Android</p>
@@ -578,13 +578,13 @@
                         <span class="text-2xl font-semibold">App Store</span>
                     </div>
                 </a>
-                <a href="https://play.google.com/apps/testing/com.kirkowens.TimeTracker" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-black border border-white/20 text-white px-6 py-3.5 rounded-xl transition hover:bg-gray-900">
+                <button onclick="openBetaModal()" class="flex items-center gap-3 bg-black border border-white/20 text-white px-6 py-3.5 rounded-xl transition hover:bg-gray-900 cursor-pointer">
                     <img src="./google-play-image.png" alt="Google Play" class="w-8 h-8 flex-shrink-0">
                     <div class="flex flex-col leading-snug">
                         <span class="text-xs uppercase tracking-wide text-gray-300">Get it on</span>
                         <span class="text-2xl font-semibold">Google Play</span>
                     </div>
-                </a>
+                </button>
             </div>
             
             <p class="text-white/80 text-sm">No account required • Privacy-focused • Works offline</p>
@@ -649,7 +649,131 @@
         </div>
     </footer>
 
+    <!-- Google Play Beta Modal -->
+    <div id="beta-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-dark-card border-2 border-primary/30 rounded-2xl max-w-md w-full p-8 relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <h3 class="text-2xl font-bold text-white mb-3">Join Android Closed Beta</h3>
+            <p class="text-gray-300 mb-4">Get early access to Tivvity on Android and receive <span class="text-primary font-semibold">Tivvity Pro lifetime for free</span>!</p>
+            
+            <div class="bg-primary/10 border border-primary/30 rounded-lg p-3 mb-6">
+                <p class="text-sm text-gray-300 text-center">
+                    <span class="text-primary font-bold text-lg">4/12</span> spots filled
+                </p>
+            </div>
+            
+            <form id="beta-form">
+                <input 
+                    type="email" 
+                    id="beta-email" 
+                    name="email" 
+                    placeholder="Enter your Google Play email" 
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-dark-bg border-2 border-dark-border text-white placeholder-gray-400 focus:outline-none focus:border-primary transition mb-2"
+                >
+                <p class="text-xs text-gray-400 mb-4">Use the email linked to your Google Play account. This ensures you can access the beta when we add you to the closed testers list.</p>
+                <button 
+                    type="submit" 
+                    class="w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl font-semibold text-lg transition"
+                >
+                    Join Beta Program
+                </button>
+                <p id="beta-message" class="mt-3 text-sm text-center"></p>
+            </form>
+        </div>
+    </div>
+
     <script>
+        // Modal functions
+        function openBetaModal() {
+            const modal = document.getElementById('beta-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBetaModal() {
+            const modal = document.getElementById('beta-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on X button click
+        document.getElementById('close-modal').addEventListener('click', closeBetaModal);
+
+        // Close modal on backdrop click
+        document.getElementById('beta-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBetaModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeBetaModal();
+            }
+        });
+
+        // Handle beta form submission
+        document.getElementById('beta-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('beta-email');
+            const submitButton = this.querySelector('button[type="submit"]');
+            const messageElement = document.getElementById('beta-message');
+            const email = emailInput.value;
+
+            // Disable button during submission
+            submitButton.disabled = true;
+            submitButton.textContent = 'Joining...';
+
+            try {
+                // Add contact to Brevo list via serverless function
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        platform: 'android'
+                    })
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    messageElement.textContent = "🎉 Success! Check your email for your Android beta link and Pro lifetime access!";
+                    messageElement.style.color = '#8B5CF6';
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Close modal after 3 seconds
+                    setTimeout(() => {
+                        closeBetaModal();
+                        messageElement.textContent = '';
+                    }, 3000);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                // Show error message
+                messageElement.textContent = 'Something went wrong. Please try again or email us at support@tivvity.com';
+                messageElement.style.color = '#EF4444';
+            } finally {
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Join Beta Program';
+            }
+        });
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
