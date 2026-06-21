@@ -259,6 +259,25 @@
             box-shadow: 0 0 24px rgba(139,92,246,0.08), 0 8px 24px rgba(0,0,0,0.08);
         }
 
+        /* ──── Log method tab toggle ──── */
+        .log-tab {
+            color: #6B7280;
+            background: rgba(19,19,26,0.8);
+            border: 1px solid rgba(255,255,255,0.06);
+            cursor: pointer;
+        }
+        .log-tab:hover { color: #D1D5DB; border-color: rgba(139,92,246,0.25); }
+        .log-tab.active-tab {
+            background: #8B5CF6;
+            color: #FFFFFF;
+            border-color: transparent;
+            box-shadow: 0 4px 14px rgba(139,92,246,0.35);
+        }
+
+        [data-theme="light"] .log-tab { background: rgba(255,255,255,0.97); border-color: rgba(0,0,0,0.07); color: #6B7280; }
+        [data-theme="light"] .log-tab:hover { color: #374151; border-color: rgba(139,92,246,0.3); }
+        [data-theme="light"] .log-tab.active-tab { color: #FFFFFF; background: #8B5CF6; }
+
         /* ──── Theme toggle button ──── */
         .theme-toggle {
             display: flex;
@@ -403,15 +422,15 @@
                 </div>
                 <!-- Review 2 -->
                 <div class="feature-card p-6 rounded-2xl">
-                    <p class="text-sm font-bold text-white mb-1">Insurance broker</p>
-                    <p class="text-xs text-gray-500 mb-3">Prayer Warrior for Christ · Mar 21</p>
-                    <p class="text-sm text-gray-400 leading-relaxed">"My day was so amazing because I was able to track my appts, tasks completed & goals met. I'm feeling very accomplished by time & habit tracking my day. I'm very motivated to finish my tasks."</p>
-                </div>
-                <!-- Review 3 -->
-                <div class="feature-card p-6 rounded-2xl">
                     <p class="text-sm font-bold text-white mb-1">After a month, it changed everything</p>
                     <p class="text-xs text-gray-500 mb-3">Tivvity user · App Store</p>
                     <p class="text-sm text-gray-400 leading-relaxed">"After a month, it completely changed how I see my day. When you start logging time, you notice patterns and can do something about them."</p>
+                </div>
+                <!-- Review 3 -->
+                <div class="feature-card p-6 rounded-2xl">
+                    <p class="text-sm font-bold text-white mb-1">Insurance broker</p>
+                    <p class="text-xs text-gray-500 mb-3">Prayer Warrior for Christ · Mar 21</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">"My day was so amazing because I was able to track my appts, tasks completed & goals met. I'm feeling very accomplished by time & habit tracking my day. I'm very motivated to finish my tasks."</p>
                 </div>
             </div>
         </div>
@@ -431,7 +450,7 @@
                         <span class="text-2xl font-black text-purple-400">1</span>
                     </div>
                     <h3 class="text-lg font-bold text-white mb-3">Log your time</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Use a timer, stopwatch, or manual input. However you prefer to track, it takes seconds.</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">Use a timer, stopwatch, or manual input. However you prefer to record your time.</p>
                 </div>
 
                 <div class="fade-in text-center p-8 rounded-3xl" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
@@ -447,75 +466,84 @@
                         <span class="text-2xl font-black text-purple-400">3</span>
                     </div>
                     <h3 class="text-lg font-bold text-white mb-3">Visualize your time</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">See your day in the dashboard, track streaks with goals, and review your full week in the calendar.</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">View charts over any period in the dashboard, review your week in the calendar, and set goals for yourself.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <hr class="section-divider mx-8">
+            <!-- Video demos -->
+            <div class="mt-20 fade-in">
+                <p class="text-center text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">See it in action</p>
+                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-10">Three ways to log your time</h3>
 
-    <!-- Features Section -->
-    <section id="features" class="py-28 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-20 fade-in">
-                <p class="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">What's inside</p>
-                <h2 class="text-4xl sm:text-5xl font-bold text-white tracking-tight">Everything you need.</h2>
+                <!-- Tabs + phone side by side -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-10">
+
+                    <!-- Left: vertical tab buttons -->
+                    <div class="flex flex-col gap-3 w-full sm:w-auto">
+                        <button class="log-tab active-tab w-full sm:w-48 px-5 py-3.5 rounded-2xl text-sm font-semibold text-left transition-all duration-200" data-tab="manual">Manual Entry</button>
+                        <button class="log-tab w-full sm:w-48 px-5 py-3.5 rounded-2xl text-sm font-semibold text-left transition-all duration-200" data-tab="timer">Timer</button>
+                        <button class="log-tab w-full sm:w-48 px-5 py-3.5 rounded-2xl text-sm font-semibold text-left transition-all duration-200" data-tab="stopwatch">Stopwatch</button>
+                        <p id="log-tab-desc" class="text-xs text-gray-500 max-w-[12rem] mt-2 leading-relaxed">Log past time</p>
+                    </div>
+
+                    <!-- Right: phone mockup -->
+                    <div class="phone-mockup flex-shrink-0" style="width:260px;height:530px;">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <video id="log-video-manual" src="./videos/manual-entry-dark.MP4" data-dark="./videos/manual-entry-dark.MP4" data-light="./videos/manual-entry-light.MP4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                            <video id="log-video-timer" src="./videos/timer-entry-dark.MP4" data-dark="./videos/timer-entry-dark.MP4" data-light="./videos/timer-entry-light.MP4" muted loop playsinline class="w-full h-full object-cover hidden"></video>
+                            <video id="log-video-stopwatch" src="./videos/stopwatch-entry-dark.MP4" data-dark="./videos/stopwatch-entry-dark.MP4" data-light="./videos/stopwatch-entry-light.MP4" muted loop playsinline class="w-full h-full object-cover hidden"></video>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Feature 1 -->
-                <div class="feature-card fade-in p-7 rounded-2xl">
-                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    </div>
-                    <h3 class="text-base font-bold text-white mb-2">Quick Time Entry</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Log activities in seconds. Track what you're doing, how long, and move on.</p>
-                </div>
+            <!-- Dashboard Detail video -->
+            <div class="mt-24 fade-in">
+                <p class="text-center text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Deep dive</p>
+                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">Understand where your time goes</h3>
+                <p class="text-center text-gray-500 text-base mb-12 max-w-md mx-auto">Dive into any category or activity and see how much time you've spent over any period. View Insights to compare your time to prior periods.</p>
 
-                <!-- Feature 2 -->
-                <div class="feature-card fade-in p-7 rounded-2xl">
-                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                <div class="flex justify-center">
+                    <div class="phone-mockup flex-shrink-0" style="width:260px;height:530px;">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <video id="dashboard-detail-video" src="./videos/dashboard-detail-dark.MP4" data-dark="./videos/dashboard-detail-dark.MP4" data-light="./videos/dashboard-detail-light.MP4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                        </div>
                     </div>
-                    <h3 class="text-base font-bold text-white mb-2">Visual Progress Tracking</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Charts that reveal your patterns across days, weeks, and months.</p>
                 </div>
+            </div>
 
-                <!-- Feature 3 -->
-                <div class="feature-card fade-in p-7 rounded-2xl">
-                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <!-- Calendar Entry video -->
+            <div class="mt-24 fade-in">
+                <p class="text-center text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Calendar</p>
+                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">Add time to your calendar</h3>
+                <p class="text-center text-gray-500 text-base mb-12 max-w-md mx-auto">Easily add and change the time of your activities in your calendar.</p>
+
+                <div class="flex justify-center">
+                    <div class="phone-mockup flex-shrink-0" style="width:260px;height:530px;">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <video src="./videos/calendar-entry-dark.MP4" data-dark="./videos/calendar-entry-dark.MP4" data-light="./videos/calendar-entry-light.MP4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                        </div>
                     </div>
-                    <h3 class="text-base font-bold text-white mb-2">Calendar View</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Your full day at a glance. See how time is distributed across everything.</p>
                 </div>
+            </div>
 
-                <!-- Feature 4 -->
-                <div class="feature-card fade-in p-7 rounded-2xl">
-                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
-                    </div>
-                    <h3 class="text-base font-bold text-white mb-2">Goals &amp; Streaks</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Set time targets per activity and build streaks to stay consistent.</p>
-                </div>
+            <!-- Goals video -->
+            <div class="mt-24 fade-in">
+                <p class="text-center text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Goals</p>
+                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">Track your progress</h3>
+                <p class="text-center text-gray-500 text-base mb-12 max-w-md mx-auto">Set weekly, monthly, and yearly goals.</p>
 
-                <!-- Feature 5 -->
-                <div class="feature-card fade-in p-7 rounded-2xl">
-                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                <div class="flex justify-center">
+                    <div class="phone-mockup flex-shrink-0" style="width:260px;height:530px;">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <video src="./videos/goals-dark.MP4" data-dark="./videos/goals-dark.MP4" data-light="./videos/goals-light.MP4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                        </div>
                     </div>
-                    <h3 class="text-base font-bold text-white mb-2">Data Export</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Your data is yours. Export your full history anytime as CSV or JSON.</p>
-                </div>
-
-                <!-- Feature 6 -->
-                <div class="feature-card fade-in p-7 rounded-2xl">
-                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
-                    </div>
-                    <h3 class="text-base font-bold text-white mb-2">Custom Categories</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Create unlimited categories for every part of your life.</p>
                 </div>
             </div>
         </div>
@@ -607,7 +635,7 @@
         </div>
         <div class="relative max-w-2xl mx-auto text-center">
             <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-5">
-                Start understanding<br>your time.
+                Start visualizing your life.
             </h2>
             <p class="text-gray-400 mb-10 text-lg">Free on iOS and Android. No account needed.</p>
 
@@ -712,6 +740,12 @@
             }
             document.querySelectorAll('.theme-img').forEach(function(img) {
                 img.src = theme === 'light' ? img.dataset.light : img.dataset.dark;
+            });
+            document.querySelectorAll('video[data-dark]').forEach(function(vid) {
+                const wasPlaying = !vid.paused;
+                vid.src = theme === 'light' ? vid.dataset.light : vid.dataset.dark;
+                vid.load();
+                if (wasPlaying) vid.play();
             });
         }
 
@@ -820,6 +854,31 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
         document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+        /* ── Log method tab toggle ── */
+        const tabDescs = {
+            manual: 'Log past time',
+            timer: 'Count down from a set duration',
+            stopwatch: 'Track time as it happens'
+        };
+        document.querySelectorAll('.log-tab').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tab = this.dataset.tab;
+                document.querySelectorAll('.log-tab').forEach(b => b.classList.remove('active-tab'));
+                this.classList.add('active-tab');
+                ['manual', 'timer', 'stopwatch'].forEach(key => {
+                    const vid = document.getElementById('log-video-' + key);
+                    if (key === tab) {
+                        vid.classList.remove('hidden');
+                        vid.play();
+                    } else {
+                        vid.classList.add('hidden');
+                        vid.pause();
+                    }
+                });
+                document.getElementById('log-tab-desc').textContent = tabDescs[tab];
+            });
+        });
     </script>
 </body>
 </html>
