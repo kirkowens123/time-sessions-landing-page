@@ -6,6 +6,9 @@
     <title>Tivvity - Track Your Time, Achieve Your Goals</title>
     <meta name="description" content="A beautiful, intuitive time tracking app that helps you understand how you spend your time and achieve your goals.">
     <link rel="icon" type="image/png" href="./favicon.png">
+    <script>
+        (function(){var t=localStorage.getItem('tivvity-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -14,705 +17,718 @@
                     colors: {
                         primary: '#8B5CF6',
                         'primary-dark': '#7C3AED',
-                        'dark-bg': '#0D0D12',
-                        'dark-card': '#1A1A24',
-                        'dark-border': '#2D2D3D',
+                        'dark-bg': '#0A0A0F',
+                        'dark-card': '#13131A',
+                        'dark-card-2': '#1C1C28',
+                        'dark-border': '#ffffff0d',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
-        * {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; }
+
         html, body {
             overflow-x: hidden;
             width: 100%;
             margin: 0;
             padding: 0;
+            background-color: #0A0A0F;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-        
-        body {
-            background-color: #0D0D12;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
-        }
-        
+
         .gradient-text {
-            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+            background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 50%, #C4B5FD 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        .feature-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        /* ──── Theme variables ──── */
+        :root {
+            --bg:           #0A0A0F;
+            --card-bg:      rgba(19,19,26,0.8);
+            --card-border:  rgba(255,255,255,0.06);
+            --nav-bg:       rgba(19,19,26,0.55);
+            --nav-border:   rgba(255,255,255,0.1);
+            --strip-bg:     rgba(19,19,26,0.6);
+            --strip-border: rgba(255,255,255,0.05);
+            --divider:      rgba(255,255,255,0.06);
+            --text-head:    #FFFFFF;
+            --cta-bg:       linear-gradient(135deg,#13131A 0%,#1a1028 50%,#13131A 100%);
+            --footer-bg:    #0A0A0F;
+            --footer-bdr:   rgba(255,255,255,0.05);
+            --modal-bg:     #13131A;
+            --modal-bdr:    rgba(255,255,255,0.08);
+            --input-bg:     #0A0A0F;
         }
-        
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        [data-theme="light"] {
+            --bg:           #F7F7FB;
+            --card-bg:      rgba(255,255,255,0.97);
+            --card-border:  rgba(0,0,0,0.07);
+            --nav-bg:       rgba(255,255,255,0.72);
+            --nav-border:   rgba(0,0,0,0.1);
+            --strip-bg:     rgba(248,248,252,0.95);
+            --strip-border: rgba(0,0,0,0.06);
+            --divider:      rgba(0,0,0,0.06);
+            --text-head:    #09090F;
+            --cta-bg:       linear-gradient(135deg,#EDEAF8 0%,#E5DDF8 50%,#EDEAF8 100%);
+            --footer-bg:    #EDEAF8;
+            --footer-bdr:   rgba(0,0,0,0.06);
+            --modal-bg:     #FFFFFF;
+            --modal-bdr:    rgba(0,0,0,0.08);
+            --input-bg:     #F7F7FB;
         }
-        
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
+        html, body { background-color: var(--bg) !important; }
+
+        /* Nav pill */
+        .nav-pill {
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--nav-border);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.05) inset;
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        [data-theme="light"] .nav-pill {
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1px 0 rgba(255,255,255,0.8) inset;
         }
-        
-        .hero-gradient {
-            background: linear-gradient(180deg, #0D0D12 0%, #1A1A24 100%);
-        }
-        
+
+        /* Phone mockup */
         .phone-mockup {
             position: relative;
-            width: 300px;
-            height: 600px;
-            background: #000;
-            border-radius: 40px;
-            padding: 12px;
-            box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.25);
+            background: #0d0d14;
+            border-radius: 44px;
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.04) inset,
+                0 40px 80px -20px rgba(0,0,0,0.7),
+                0 0 60px rgba(139,92,246,0.12);
         }
-        
+
         .phone-screen {
             width: 100%;
             height: 100%;
-            border-radius: 32px;
+            border-radius: 36px;
             overflow: hidden;
             background: #000;
         }
-        
+
         .phone-notch {
             position: absolute;
-            top: 12px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 28px;
-            background: #000;
-            border-radius: 0 0 20px 20px;
+            width: 100px;
+            height: 24px;
+            background: #0d0d14;
+            border-radius: 0 0 16px 16px;
             z-index: 10;
         }
+
+        /* Glow blob */
+        .glow-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        /* Feature card */
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(139,92,246,0.35);
+            box-shadow: 0 0 32px rgba(139,92,246,0.12), 0 8px 32px rgba(0,0,0,0.4);
+            transform: translateY(-3px);
+        }
+
+        /* FAQ accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.25s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-item.open .faq-chevron {
+            transform: rotate(180deg);
+        }
+
+        .faq-chevron {
+            transition: transform 0.3s ease;
+        }
+
+        /* Scroll fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Step connector */
+        .step-connector {
+            position: absolute;
+            top: 40px;
+            left: calc(50% + 40px);
+            width: calc(100% - 80px);
+            height: 1px;
+            background: linear-gradient(90deg, rgba(139,92,246,0.4), rgba(139,92,246,0.1));
+        }
+
+        /* Section divider */
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--divider), transparent);
+        }
+
+        /* ──── Theme-aware element classes ──── */
+        .social-strip  { background: var(--strip-bg) !important; border-color: var(--strip-border) !important; }
+        .site-footer   { background: var(--footer-bg) !important; border-color: var(--footer-bdr) !important; }
+        .modal-panel   { background: var(--modal-bg) !important; border-color: var(--modal-bdr) !important; }
+        #beta-email    { background: var(--input-bg) !important; border-color: var(--modal-bdr) !important; color: var(--text-head) !important; }
+        #download      { background: var(--cta-bg) !important; }
+
+        /* Inline-style dark cards (How It Works steps, FAQ rows, Founder) */
+        [data-theme="light"] [style*="rgba(19,19,26"] {
+            background: var(--card-bg) !important;
+            border-color: var(--card-border) !important;
+        }
+
+        /* ──── Light-mode text & colour overrides ──── */
+        [data-theme="light"] .text-white            { color: var(--text-head) !important; }
+
+        /* Gray scale — remap so hierarchy still reads on light bg */
+        [data-theme="light"] .text-gray-400         { color: #4B5563 !important; } /* nav links, subheadlines */
+        [data-theme="light"] .text-gray-500         { color: #374151 !important; } /* body text, card descriptions */
+        [data-theme="light"] .text-gray-600         { color: #6B7280 !important; } /* fine print / whisper text */
+        [data-theme="light"] .text-gray-700         { color: #4B5563 !important; } /* footer copyright */
+
+        /* Nav logo — convert white SVG to brand purple in light mode */
+        [data-theme="light"] .nav-logo {
+            filter: brightness(0) saturate(100%) invert(44%) sepia(87%) saturate(1141%) hue-rotate(231deg) brightness(101%) contrast(96%);
+        }
+
+        /* Keep white text on purple buttons regardless of the .text-white override */
+        [data-theme="light"] .bg-primary            { color: #FFFFFF !important; }
+        [data-theme="light"] .bg-primary-dark       { color: #FFFFFF !important; }
+
+        /* Purple — original values are too pale on white */
+        [data-theme="light"] .text-purple-300       { color: #6D28D9 !important; } /* badge label */
+        [data-theme="light"] .text-purple-400       { color: #6D28D9 !important; } /* section labels, step numbers, SVG icons */
+        [data-theme="light"] .bg-purple-400         { background-color: #7C3AED !important; } /* badge pulse dot */
+
+        /* Stars wash out on light bg */
+        [data-theme="light"] .text-yellow-400       { color: #D97706 !important; }
+
+        /* Interactive states */
+        [data-theme="light"] .bg-dark-card-2        { background-color: #EDEDF5 !important; }
+        [data-theme="light"] .border-white\/10      { border-color: rgba(0,0,0,0.1) !important; }
+        [data-theme="light"] .hover\:border-white\/25:hover { border-color: rgba(0,0,0,0.2) !important; }
+        [data-theme="light"] .bg-white\/5           { background-color: rgba(0,0,0,0.04) !important; }
+        [data-theme="light"] .hover\:bg-white\/10:hover { background-color: rgba(0,0,0,0.06) !important; }
+        [data-theme="light"] .hover\:text-gray-300:hover { color: #374151 !important; }
+        [data-theme="light"] .hover\:text-white:hover     { color: #09090F !important; }
+        [data-theme="light"] .phone-mockup {
+            background: #F0F0F8;
+            border-color: rgba(0,0,0,0.08);
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.04) inset, 0 30px 60px -15px rgba(0,0,0,0.18), 0 0 30px rgba(139,92,246,0.06);
+        }
+        [data-theme="light"] .phone-notch { background: #F0F0F8; }
+        [data-theme="light"] .faq-chevron { color: #9CA3AF !important; }
+        [data-theme="light"] .feature-card:hover {
+            border-color: rgba(139,92,246,0.3);
+            box-shadow: 0 0 24px rgba(139,92,246,0.08), 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        /* ──── Theme toggle button ──── */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--nav-border);
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.05) inset;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            color: #9CA3AF;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover { background: rgba(30,30,40,0.85); color: #fff; }
+        [data-theme="light"] .theme-toggle { box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1px 0 rgba(255,255,255,0.8) inset; color: #6B7280; }
+        [data-theme="light"] .theme-toggle:hover { background: rgba(240,240,248,0.95); color: #09090F; }
+
+        /* ──── Theme transition ──── */
+        *, *::before, *::after { transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease; }
+        .phone-mockup, .phone-mockup * { transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
     </style>
 </head>
 <body class="antialiased">
+
     <!-- Navigation -->
-    <nav class="fixed w-full backdrop-blur-md z-50 border-b border-dark-border" style="background-color: rgba(13, 13, 18, 0.8); left: 0; right: 0;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="#" class="flex items-center space-x-2 hover:opacity-80 transition">
-                    <img src="./logo.svg" alt="Tivvity" class="w-8 h-8">
-                    <span class="text-xl font-bold text-white">Tivvity</span>
+    <nav class="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
+        <div class="nav-pill mx-auto px-8 py-3.5 flex items-center justify-between rounded-full" style="max-width:52rem;">
+            <a href="#" class="flex items-center gap-2 hover:opacity-80 transition">
+                <img src="./logo.svg" alt="Tivvity" class="nav-logo w-8 h-8">
+                <span class="text-lg font-bold text-white tracking-tight">Tivvity</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="#how-it-works" class="text-base text-gray-400 hover:text-white transition font-medium">How It Works</a>
+                <a href="#screenshots" class="text-base text-gray-400 hover:text-white transition font-medium">Screenshots</a>
+                <a href="#features" class="text-base text-gray-400 hover:text-white transition font-medium">Features</a>
+                <a href="#faq" class="text-base text-gray-400 hover:text-white transition font-medium">FAQ</a>
+                <a href="https://apps.apple.com/us/app/tivvity-time-habit-tracker/id6755462279" target="_blank" rel="noopener noreferrer"
+                   class="bg-primary hover:bg-primary-dark text-white text-base font-semibold px-6 py-2.5 rounded-full transition">
+                    Download
                 </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#how-it-works" class="text-gray-300 hover:text-white transition">How It Works</a>
-                    <a href="#screenshots" class="text-gray-300 hover:text-white transition">Screenshots</a>
-                    <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
-                    <a href="#faq" class="text-gray-300 hover:text-white transition">FAQ</a>
-                    <a href="#download" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-medium transition">Download</a>
-                </div>
-                <a href="#download" class="md:hidden bg-primary hover:bg-primary-dark text-white px-5 py-2 rounded-lg font-medium transition text-sm">Download</a>
             </div>
         </div>
     </nav>
 
+    <!-- Floating theme toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="position:fixed;top:1.25rem;right:1.25rem;z-index:60;">
+        <svg id="icon-sun" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg id="icon-moon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+
     <!-- Hero Section -->
-    <section class="hero-gradient pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="text-center lg:text-left order-2 lg:order-1">
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-8">
-                        <span class="gradient-text">See where your life actually goes</span>
-                    </h1>
-                    <p class="text-2xl text-gray-200 mb-10 max-w-2xl mx-auto lg:mx-0">
-                        Track what you do.<br>
-                        Discover where your time actually goes.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto lg:mx-0 mb-4">
-                        <a href="https://apps.apple.com/us/app/tivvity-time-habit-tracker/id6755462279" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-black border border-white/20 text-white px-6 py-3.5 rounded-xl transition hover:bg-gray-900">
-                            <svg class="w-9 h-9 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                            <div class="flex flex-col leading-snug">
-                                <span class="text-xs uppercase tracking-wide text-gray-300">Available on the</span>
-                                <span class="text-2xl font-semibold">App Store</span>
-                            </div>
-                        </a>
-                        <button onclick="openBetaModal()" class="flex items-center gap-3 bg-black border border-white/20 text-white px-6 py-3.5 rounded-xl transition hover:bg-gray-900 cursor-pointer">
-                            <img src="./google-play-image.png" alt="Google Play" class="w-8 h-8 flex-shrink-0">
-                            <div class="flex flex-col leading-snug">
-                                <span class="text-xs uppercase tracking-wide text-gray-300">Get it on</span>
-                                <span class="text-2xl font-semibold">Google Play</span>
-                            </div>
-                        </button>
-                    </div>
-                    <div class="flex flex-col items-center lg:items-start gap-2 mt-4">
-                        <p class="text-sm text-gray-400">Available now on iOS and Android</p>
-                    </div>
-                    <!-- Privacy-First Callout -->
-                    <div class="mt-8 bg-dark-card/50 backdrop-blur-sm border-2 border-primary/30 rounded-2xl p-6 max-w-md mx-auto lg:mx-0">
-                        <h3 class="text-lg font-bold text-white mb-3">Private by design</h3>
-                        <div class="space-y-2 text-gray-300">
-                            <p class="flex items-center">
-                                <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                </svg>
-                                No account required
-                            </p>
-                            <p class="flex items-center">
-                                <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                </svg>
-                                Data stays on your device
-                            </p>
-                            <p class="flex items-center">
-                                <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                </svg>
-                                Works completely offline
-                            </p>
-                        </div>
+    <section class="relative pt-36 pb-12 px-4 text-center overflow-x-hidden">
+        <!-- Background glows -->
+        <div class="glow-blob w-96 h-96 bg-purple-700 opacity-20 -top-20 left-1/2 -translate-x-1/2" style="position:absolute;top:-80px;left:50%;transform:translateX(-50%);"></div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/25 text-purple-300 text-xs font-semibold px-4 py-1.5 rounded-full mb-8 tracking-wide uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse inline-block"></span>
+                Free on iOS &amp; Android
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-white mb-6">
+                See where your<br>
+                <span class="gradient-text">life actually goes.</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="text-lg sm:text-xl text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
+                Track what you do. Discover patterns. Turn your time into progress.<br>
+                No account required. Works completely offline.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+                <a href="https://apps.apple.com/us/app/tivvity-time-habit-tracker/id6755462279" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center justify-center gap-3 bg-white text-black px-6 py-3.5 rounded-full font-semibold text-sm transition hover:bg-gray-100 shadow-lg">
+                    <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download on App Store
+                </a>
+                <button onclick="openBetaModal()"
+                        class="flex items-center justify-center gap-3 bg-dark-card-2 border border-white/10 text-white px-6 py-3.5 rounded-full font-semibold text-sm transition hover:border-white/25 cursor-pointer">
+                    <img src="./google-play-image.png" alt="Google Play" class="w-5 h-5 flex-shrink-0">
+                    Get it on Google Play
+                </button>
+            </div>
+            <p class="text-xs text-gray-600 mb-16">No account required &nbsp;·&nbsp; Privacy-first &nbsp;·&nbsp; Works offline</p>
+        </div>
+
+        <!-- Phone Mockup Showcase -->
+        <div class="relative max-w-5xl mx-auto pb-4">
+            <!-- Glow beneath phones -->
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-purple-700 opacity-25 blur-3xl rounded-full pointer-events-none"></div>
+            <div class="flex items-end justify-center gap-5 sm:gap-8">
+                <!-- Left phone (calendar) — slightly shorter -->
+                <div class="phone-mockup flex-shrink-0 hidden sm:block" style="width:260px;height:530px;transform:rotate(-4deg) translateY(24px);">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="./calendar.png" data-dark="./calendar.png" data-light="./calendar-light.png" alt="Calendar view" class="w-full h-full object-cover object-top theme-img">
                     </div>
                 </div>
-                <div class="relative animate-float order-1 lg:order-2">
-                    <div class="phone-mockup mx-auto">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <img src="./dashboard.png" alt="Tivvity Dashboard" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="w-full h-full bg-dark-card p-6 flex flex-col" style="display: none;">
-                                <div class="text-center text-white mb-6">
-                                    <div class="text-sm text-gray-400 mb-2">Dashboard</div>
-                                    <div class="text-2xl font-bold">This week, Feb 9-15</div>
-                                </div>
-                                <div class="flex justify-around mb-8">
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-12 h-24 bg-gradient-to-t from-blue-500 to-purple-500 rounded-lg mb-1"></div>
-                                        <span class="text-xs text-gray-400">M</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-12 h-32 bg-gradient-to-t from-blue-500 to-purple-500 rounded-lg mb-1"></div>
-                                        <span class="text-xs text-gray-400">T</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-12 h-28 bg-gradient-to-t from-blue-500 to-purple-500 rounded-lg mb-1"></div>
-                                        <span class="text-xs text-gray-400">W</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-12 h-36 bg-gradient-to-t from-blue-500 to-purple-500 rounded-lg mb-1"></div>
-                                        <span class="text-xs text-gray-400">T</span>
-                                    </div>
-                                </div>
-                                <div class="space-y-3">
-                                    <div class="flex items-center justify-between p-3 bg-dark-bg rounded-lg">
-                                        <div class="flex items-center space-x-3">
-                                            <span class="text-xl">�</span>
-                                            <div>
-                                                <p class="font-medium text-white text-sm">Work</p>
-                                                <div class="w-32 h-1 bg-blue-500 rounded-full mt-1"></div>
-                                            </div>
-                                        </div>
-                                        <span class="text-white text-sm font-medium">22h 8m</span>
-                                    </div>
-                                    <div class="flex items-center justify-between p-3 bg-dark-bg rounded-lg">
-                                        <div class="flex items-center space-x-3">
-                                            <span class="text-xl">�</span>
-                                            <div>
-                                                <p class="font-medium text-white text-sm">Social</p>
-                                                <div class="w-20 h-1 bg-red-500 rounded-full mt-1"></div>
-                                            </div>
-                                        </div>
-                                        <span class="text-white text-sm font-medium">7h 39m</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Center phone (dashboard) — tallest -->
+                <div class="phone-mockup flex-shrink-0" style="width:290px;height:590px;">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="./dashboard.png" data-dark="./dashboard.png" data-light="./dashboard-light.png" alt="Dashboard" class="w-full h-full object-cover object-top theme-img">
                     </div>
-                    <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-gradient-to-br from-primary to-primary-dark rounded-full opacity-20 blur-3xl"></div>
-                    <div class="absolute -top-6 -left-6 w-72 h-72 bg-gradient-to-br from-primary to-purple-600 rounded-full opacity-20 blur-3xl"></div>
+                </div>
+                <!-- Right phone (goals) — slightly shorter -->
+                <div class="phone-mockup flex-shrink-0 hidden sm:block" style="width:260px;height:530px;transform:rotate(4deg) translateY(24px);">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="./goals.png" data-dark="./goals.png" data-light="./goals-light.png" alt="Goals view" class="w-full h-full object-cover object-top theme-img">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonial Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="flex justify-center mb-6">
-                <div class="flex gap-1 text-yellow-400 text-2xl">
-                    <span>⭐</span>
-                    <span>⭐</span>
-                    <span>⭐</span>
-                    <span>⭐</span>
-                    <span>⭐</span>
+    <!-- Social Proof / Testimonials -->
+    <section class="social-strip py-16 px-4 sm:px-6 lg:px-8 border-t border-b" style="border-color:rgba(255,255,255,0.05);background:rgba(19,19,26,0.6);">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex justify-center gap-1 mb-2">
+                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
+            </div>
+            <p class="text-center text-xs text-gray-500 mb-10">5.0 · App Store</p>
+
+            <div class="grid sm:grid-cols-3 gap-4">
+                <!-- Review 1 -->
+                <div class="feature-card p-6 rounded-2xl">
+                    <p class="text-sm font-bold text-white mb-1">Best Activity Dashboards!!</p>
+                    <p class="text-xs text-gray-500 mb-3">Ccllaaiire · Mar 12</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">"I kept telling myself I'd 'be more productive' without actually doing anything about it. Tracking my habits always felt like a chore, until this. The dashboard is genuinely the reason I keep coming back."</p>
                 </div>
-            </div>
-            <h2 class="text-4xl sm:text-5xl font-bold text-white mb-8">"I've been using Tivvity for 4 months and it completely changed how I see my day."</h2>
-            <div class="space-y-4 text-lg text-gray-300 mb-12">
-                <p>When you start logging time, you notice patterns and can create goals for your categories and activities.</p>
-                <p>Now you can keep track of what you're doing, how long, and where your time is actually spent.</p>
-            </div>
-            
-            <!-- Insights Section -->
-            <div class="bg-dark-card/50 backdrop-blur-sm border-2 border-primary/30 rounded-2xl p-8 max-w-2xl mx-auto">
-                <h3 class="text-xl font-bold text-white mb-6">Example insights Tivvity users discover:</h3>
-                <div class="space-y-3 text-left">
-                    <p class="flex items-start text-gray-300">
-                        <span class="text-primary mr-3 flex-shrink-0">•</span>
-                        <span>"I average 7 hours of sleep per night."</span>
-                    </p>
-                    <p class="flex items-start text-gray-300">
-                        <span class="text-primary mr-3 flex-shrink-0">•</span>
-                        <span>"I only worked out 3 times this month."</span>
-                    </p>
-                    <p class="flex items-start text-gray-300">
-                        <span class="text-primary mr-3 flex-shrink-0">•</span>
-                        <span>"My hobbies happen way less often than I thought."</span>
-                    </p>
+                <!-- Review 2 -->
+                <div class="feature-card p-6 rounded-2xl">
+                    <p class="text-sm font-bold text-white mb-1">Insurance broker</p>
+                    <p class="text-xs text-gray-500 mb-3">Prayer Warrior for Christ · Mar 21</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">"My day was so amazing because I was able to track my appts, tasks completed & goals met. I'm feeling very accomplished by time & habit tracking my day. I'm very motivated to finish my tasks."</p>
+                </div>
+                <!-- Review 3 -->
+                <div class="feature-card p-6 rounded-2xl">
+                    <p class="text-sm font-bold text-white mb-1">After a month, it changed everything</p>
+                    <p class="text-xs text-gray-500 mb-3">Tivvity user · App Store</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">"After a month, it completely changed how I see my day. When you start logging time, you notice patterns and can do something about them."</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works Section -->
-    <section id="how-it-works" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">How It Works</h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Get started in three simple steps</p>
+    <section id="how-it-works" class="py-28 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-20 fade-in">
+                <p class="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Simple by design</p>
+                <h2 class="text-4xl sm:text-5xl font-bold text-white tracking-tight">Three steps. That's it.</h2>
             </div>
-            
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <span class="text-3xl font-bold text-white">1</span>
+
+            <div class="grid md:grid-cols-3 gap-6 relative">
+                <div class="fade-in text-center p-8 rounded-3xl" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-black text-purple-400">1</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Select Category & Activity</h3>
-                    <p class="text-gray-400">Choose from your categories and activities, just like a calendar. Simple and organized.</p>
+                    <h3 class="text-lg font-bold text-white mb-3">Log your time</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Use a timer, stopwatch, or manual input. However you prefer to track, it takes seconds.</p>
                 </div>
-                
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-gradient-to-br from-primary to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <span class="text-3xl font-bold text-white">2</span>
+
+                <div class="fade-in text-center p-8 rounded-3xl" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-black text-purple-400">2</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Track Time</h3>
-                    <p class="text-gray-400">Enter how long you spent on that activity. Quick and easy.</p>
+                    <h3 class="text-lg font-bold text-white mb-3">Organize by category</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Create categories and activities that match your life. Sleep, work, fitness, hobbies. Whatever matters to you.</p>
                 </div>
-                
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <span class="text-3xl font-bold text-white">3</span>
+
+                <div class="fade-in text-center p-8 rounded-3xl" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-black text-purple-400">3</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Visualize & Create Goals</h3>
-                    <p class="text-gray-400">See what you spend time on in your dashboard. Notice patterns and create goals for your categories and activities.</p>
+                    <h3 class="text-lg font-bold text-white mb-3">Visualize your time</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">See your day in the dashboard, track streaks with goals, and review your full week in the calendar.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Screenshots Section -->
-    <section id="screenshots" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">Visualize Your Time</h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">See exactly what you spend time on with charts and insights</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="phone-mockup mx-auto mb-6" style="width: 250px; height: 500px;">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <img src="./calendar.png" alt="Calendar" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="w-full h-full bg-dark-card flex items-center justify-center" style="display: none;">
-                                <span class="text-6xl">�</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Track your day in seconds</h3>
-                    <p class="text-gray-400">Keep track of what you're doing, how long, and where your time is actually spent</p>
-                </div>
-                <div class="text-center">
-                    <div class="phone-mockup mx-auto mb-6" style="width: 250px; height: 500px;">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <img src="./dashboard.png" alt="Dashboard" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="w-full h-full bg-dark-card flex items-center justify-center" style="display: none;">
-                                <span class="text-6xl">📊</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Discover where your time really goes</h3>
-                    <p class="text-gray-400">Visualize what you spend time on in your dashboard</p>
-                </div>
-                <div class="text-center">
-                    <div class="phone-mockup mx-auto mb-6" style="width: 250px; height: 500px;">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <img src="./goals.png" alt="Goals" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="w-full h-full bg-dark-card flex items-center justify-center" style="display: none;">
-                                <span class="text-6xl">🎯</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Turn insights into better habits</h3>
-                    <p class="text-gray-400">Set goals for your categories and activities</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Who It's For Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12">Who Tivvity helps most</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="text-4xl mb-4">📚</div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Students</h3>
-                    <p class="text-gray-400">Trying to study more and scroll less</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl mb-4">💼</div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Founders</h3>
-                    <p class="text-gray-400">Who want proof of where their day actually goes</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl mb-4">🎯</div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Habit builders</h3>
-                    <p class="text-gray-400">Who want real data behind their routines</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comparison Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Not another work timer</h2>
-                <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">Most time trackers are built for freelancers and billable hours.</p>
-                <p class="text-2xl font-semibold text-white">Tivvity is built for your life.</p>
-            </div>
-            
-            <div class="bg-dark-card/50 backdrop-blur-sm border-2 border-primary/30 rounded-2xl p-8 max-w-2xl mx-auto">
-                <h3 class="text-xl font-bold text-white mb-6 text-center">Track everything that matters:</h3>
-                <div class="grid grid-cols-2 gap-4 text-lg">
-                    <div class="flex items-center text-gray-300">
-                        <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        Sleep
-                    </div>
-                    <div class="flex items-center text-gray-300">
-                        <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        Workouts
-                    </div>
-                    <div class="flex items-center text-gray-300">
-                        <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        Studying
-                    </div>
-                    <div class="flex items-center text-gray-300">
-                        <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        Hobbies
-                    </div>
-                    <div class="flex items-center text-gray-300">
-                        <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        Work
-                    </div>
-                    <div class="flex items-center text-gray-300">
-                        <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        Daily Habits
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <hr class="section-divider mx-8">
 
     <!-- Features Section -->
-    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">Everything You Need</h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Powerful features designed to help you track time effortlessly and achieve your goals</p>
+    <section id="features" class="py-28 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-20 fade-in">
+                <p class="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">What's inside</p>
+                <h2 class="text-4xl sm:text-5xl font-bold text-white tracking-tight">Everything you need.</h2>
             </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <!-- Feature 1 -->
-                <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <h3 class="text-2xl font-bold text-white mb-4"><span class="text-3xl mr-2">⚡</span>Quick Time Entry</h3>
-                    <p class="text-gray-400 mb-2 leading-relaxed">Log activities in seconds.</p>
-                    <p class="text-gray-400 leading-relaxed">Track what you're doing, how long, and move on.</p>
+                <div class="feature-card fade-in p-7 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Quick Time Entry</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Log activities in seconds. Track what you're doing, how long, and move on.</p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <h3 class="text-2xl font-bold text-white mb-4"><span class="text-3xl mr-2">📊</span>Visual Progress Tracking</h3>
-                    <p class="text-gray-400 mb-2 leading-relaxed">See where your time actually goes.</p>
-                    <p class="text-gray-400 leading-relaxed">Charts reveal patterns across days, weeks, and months.</p>
+                <div class="feature-card fade-in p-7 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Visual Progress Tracking</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Charts that reveal your patterns across days, weeks, and months.</p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <h3 class="text-2xl font-bold text-white mb-4"><span class="text-3xl mr-2">📅</span>Calendar View</h3>
-                    <p class="text-gray-400 mb-2 leading-relaxed">Your day at a glance.</p>
-                    <p class="text-gray-400 leading-relaxed">See how your time is distributed across activities.</p>
+                <div class="feature-card fade-in p-7 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Calendar View</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Your full day at a glance. See how time is distributed across everything.</p>
                 </div>
 
                 <!-- Feature 4 -->
-                <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <h3 class="text-2xl font-bold text-white mb-4"><span class="text-3xl mr-2">🎯</span>Goals & Streaks</h3>
-                    <p class="text-gray-400 mb-2 leading-relaxed">Turn insights into habits.</p>
-                    <p class="text-gray-400 leading-relaxed">Set time targets and track streaks to stay consistent.</p>
+                <div class="feature-card fade-in p-7 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Goals &amp; Streaks</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Set time targets per activity and build streaks to stay consistent.</p>
                 </div>
 
                 <!-- Feature 5 -->
-                <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <h3 class="text-2xl font-bold text-white mb-4"><span class="text-3xl mr-2">📤</span>Data Export</h3>
-                    <p class="text-gray-400 mb-2 leading-relaxed">Your data stays yours.</p>
-                    <p class="text-gray-400 leading-relaxed">Export your time tracking history anytime.</p>
+                <div class="feature-card fade-in p-7 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Data Export</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Your data is yours. Export your full history anytime as CSV or JSON.</p>
                 </div>
 
                 <!-- Feature 6 -->
-                <div class="feature-card bg-dark-card p-8 rounded-2xl border-2 border-dark-border shadow-lg hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <h3 class="text-2xl font-bold text-white mb-4"><span class="text-3xl mr-2">🏷</span>Custom Categories</h3>
-                    <p class="text-gray-400 mb-2 leading-relaxed">Track what matters to you.</p>
-                    <p class="text-gray-400 leading-relaxed">Create unlimited categories for your life.</p>
+                <div class="feature-card fade-in p-7 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Custom Categories</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Create unlimited categories for every part of your life.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <hr class="section-divider mx-8">
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">Frequently Asked Questions</h2>
-            <div class="space-y-6">
-                <div class="bg-dark-bg p-6 rounded-xl border-2 border-dark-border">
-                    <h3 class="text-lg font-bold text-white mb-2">Do I need an account?</h3>
-                    <p class="text-gray-300">No account required. Your data stays on your device—no sign-up, no login.</p>
+    <section id="faq" class="py-28 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Got questions?</p>
+                <h2 class="text-4xl sm:text-5xl font-bold text-white tracking-tight">FAQ</h2>
+            </div>
+
+            <div class="space-y-2" id="faq-list">
+                <div class="faq-item fade-in rounded-2xl overflow-hidden" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
+                    <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left">
+                        <span class="text-sm font-semibold text-white">Do I need an account?</span>
+                        <svg class="faq-chevron w-4 h-4 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer"><p class="px-6 pb-5 text-sm text-gray-500 leading-relaxed">No account required. Your data stays on your device — no sign-up, no login, no cloud.</p></div>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-xl border-2 border-dark-border">
-                    <h3 class="text-lg font-bold text-white mb-2">Is it free?</h3>
-                    <p class="text-gray-300">Tivvity offers a free version with core features. Pro features are available via subscription with pricing shown in-app.</p>
+
+                <div class="faq-item fade-in rounded-2xl overflow-hidden" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
+                    <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left">
+                        <span class="text-sm font-semibold text-white">Is it free?</span>
+                        <svg class="faq-chevron w-4 h-4 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer"><p class="px-6 pb-5 text-sm text-gray-500 leading-relaxed">Yes — core features are completely free. Pro features are available via subscription, with pricing shown in-app.</p></div>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-xl border-2 border-dark-border">
-                    <h3 class="text-lg font-bold text-white mb-2">Does it work offline?</h3>
-                    <p class="text-gray-300">Yes! All your data is stored locally on your device, so Tivvity works completely offline.</p>
+
+                <div class="faq-item fade-in rounded-2xl overflow-hidden" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
+                    <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left">
+                        <span class="text-sm font-semibold text-white">Does it work offline?</span>
+                        <svg class="faq-chevron w-4 h-4 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer"><p class="px-6 pb-5 text-sm text-gray-500 leading-relaxed">Yes. All your data is stored locally on your device. Tivvity works completely offline, always.</p></div>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-xl border-2 border-dark-border">
-                    <h3 class="text-lg font-bold text-white mb-2">How do I export my data?</h3>
-                    <p class="text-gray-300">Export your time tracking data anytime in CSV or JSON format from the app settings.</p>
+
+                <div class="faq-item fade-in rounded-2xl overflow-hidden" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
+                    <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left">
+                        <span class="text-sm font-semibold text-white">How do I export my data?</span>
+                        <svg class="faq-chevron w-4 h-4 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer"><p class="px-6 pb-5 text-sm text-gray-500 leading-relaxed">Go to app Settings → Export. You can download your full history as CSV or JSON anytime.</p></div>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-xl border-2 border-dark-border">
-                    <h3 class="text-lg font-bold text-white mb-2">How do I cancel Pro?</h3>
-                    <p class="text-gray-300">Manage your subscription anytime through your Apple ID settings. Cancel at least 24 hours before renewal.</p>
+
+                <div class="faq-item fade-in rounded-2xl overflow-hidden" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
+                    <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left">
+                        <span class="text-sm font-semibold text-white">How do I cancel Pro?</span>
+                        <svg class="faq-chevron w-4 h-4 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer"><p class="px-6 pb-5 text-sm text-gray-500 leading-relaxed">Manage your subscription anytime through Apple ID settings. Cancel at least 24 hours before your next renewal.</p></div>
                 </div>
             </div>
         </div>
     </section>
 
+    <hr class="section-divider mx-8">
+
     <!-- Founder Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card">
-        <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Built by an independent developer</h2>
-            </div>
-            <div class="bg-dark-card p-8 rounded-2xl border-2 border-dark-border">
-                <div class="flex flex-col md:flex-row gap-6 mb-6">
-                    <div class="flex-shrink-0">
-                        <img src="./profile-photo.png" alt="Kirk Owens" class="w-24 h-24 rounded-full border-2 border-primary/30 mx-auto md:mx-0" onerror="this.style.display='none'">
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-lg text-gray-300 mb-4">
-                            Hi, I'm Kirk. I built Tivvity because I wanted a better way to understand how I actually spend my time.
-                        </p>
-                        <p class="text-lg text-gray-300 mb-4">
-                            I'm actively improving the app based on user feedback. Have thoughts or suggestions? I read every message.
-                        </p>
-                        <p class="text-lg text-white font-semibold">
-                            Download Tivvity and start understanding your time.
-                        </p>
-                    </div>
-                </div>
-                <div class="border-t border-dark-border pt-6">
-                    <h3 class="text-lg font-bold text-white mb-3">What I'm building next:</h3>
-                    <ul class="text-gray-300 space-y-2">
-                        <li>• Apple Watch companion app</li>
-                        <li>• Widgets for quick time entry</li>
-                        <li>• Advanced analytics and insights</li>
-                        <li>• iCloud sync (optional)</li>
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+            <div class="fade-in flex flex-col sm:flex-row gap-6 items-start p-8 rounded-3xl" style="background:rgba(19,19,26,0.8);border:1px solid rgba(255,255,255,0.06);">
+                <img src="./profile-photo.png" alt="Kirk Owens" class="w-16 h-16 rounded-full border border-white/10 flex-shrink-0 mx-auto sm:mx-0" onerror="this.style.display='none'">
+                <div>
+                    <p class="text-sm font-semibold text-white mb-1">Kirk Owens <span class="text-gray-600 font-normal">, indie developer</span></p>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-4">I built Tivvity because I wanted to understand how I actually spend my time. I'm actively improving it based on user feedback. I read every message.</p>
+                    <p class="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-2">What's coming next</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>Apple Watch companion app</li>
+                        <li>Widgets for quick time entry</li>
+                        <li>Advanced analytics and insights</li>
+                        <li>iCloud sync (optional)</li>
                     </ul>
+                    <a href="mailto:support@tivvity.com" class="inline-block mt-5 text-sm text-purple-400 hover:text-purple-300 transition font-medium">
+                        support@tivvity.com →
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section id="download" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-bg">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Start tracking your time today</h2>
-            <p class="text-xl text-white/90 mb-10">Download Tivvity free on iOS and Android.</p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <a href="https://apps.apple.com/us/app/tivvity-time-habit-tracker/id6755462279" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-black border border-white/20 text-white px-6 py-3.5 rounded-xl transition hover:bg-gray-900">
-                    <svg class="w-9 h-9 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                    <div class="flex flex-col leading-snug">
-                        <span class="text-xs uppercase tracking-wide text-gray-300">Available on the</span>
-                        <span class="text-2xl font-semibold">App Store</span>
-                    </div>
+    <section id="download" class="relative py-32 px-4 overflow-hidden" style="background:linear-gradient(135deg,#13131A 0%,#1a1028 50%,#13131A 100%);">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-purple-700 opacity-15 blur-3xl rounded-full"></div>
+        </div>
+        <div class="relative max-w-2xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-5">
+                Start understanding<br>your time.
+            </h2>
+            <p class="text-gray-400 mb-10 text-lg">Free on iOS and Android. No account needed.</p>
+
+            <div class="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+                <a href="https://apps.apple.com/us/app/tivvity-time-habit-tracker/id6755462279" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center justify-center gap-3 bg-white text-black px-7 py-4 rounded-full font-semibold text-sm transition hover:bg-gray-100 shadow-xl">
+                    <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download on App Store
                 </a>
-                <button onclick="openBetaModal()" class="flex items-center gap-3 bg-black border border-white/20 text-white px-6 py-3.5 rounded-xl transition hover:bg-gray-900 cursor-pointer">
-                    <img src="./google-play-image.png" alt="Google Play" class="w-8 h-8 flex-shrink-0">
-                    <div class="flex flex-col leading-snug">
-                        <span class="text-xs uppercase tracking-wide text-gray-300">Get it on</span>
-                        <span class="text-2xl font-semibold">Google Play</span>
-                    </div>
+                <button onclick="openBetaModal()"
+                        class="flex items-center justify-center gap-3 bg-white/5 border border-white/10 text-white px-7 py-4 rounded-full font-semibold text-sm transition hover:bg-white/10 cursor-pointer">
+                    <img src="./google-play-image.png" alt="Google Play" class="w-5 h-5 flex-shrink-0">
+                    Get it on Google Play
                 </button>
             </div>
-            
-            <p class="text-white/80 text-sm">No account required • Privacy-focused • Works offline</p>
+            <p class="text-xs text-gray-600">No account required &nbsp;·&nbsp; Privacy-first &nbsp;·&nbsp; Works offline</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-card border-t border-dark-border text-white py-16 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
-                <!-- Column 1: Brand -->
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <img src="./logo.svg" alt="Tivvity" class="w-8 h-8">
-                        <span class="font-bold text-xl">Tivvity</span>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-4">See where your life actually goes.</p>
-                    <p class="text-gray-400 text-sm mb-4">Privacy-first time tracking for understanding how you spend your time.</p>
-                    <p class="text-gray-400 text-sm mb-4">Built by an independent developer.</p>
-                    <div class="flex items-center text-sm text-gray-400 mt-4">
-                        <svg class="w-4 h-4 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
-                        </svg>
-                        <span>Privacy-first • No account required</span>
-                    </div>
-                </div>
-                
-                <!-- Column 2: Product -->
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Product</h4>
-                    <ul class="space-y-3 text-gray-400 text-sm">
-                        <li><a href="#how-it-works" class="hover:text-white transition">How It Works</a></li>
-                        <li><a href="#features" class="hover:text-white transition">Features</a></li>
-                        <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
-                        <li><a href="#download" class="hover:text-white transition">Download</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Column 3: Legal -->
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Legal</h4>
-                    <ul class="space-y-3 text-gray-400 text-sm">
-                        <li><a href="./privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="./terms.html" class="hover:text-white transition">Terms of Use</a></li>
-                        <li><a href="mailto:support@tivvity.com" class="hover:text-white transition">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Column 4: Contact -->
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Contact</h4>
-                    <p class="text-gray-400 text-sm mb-3">Questions or feedback?</p>
-                    <a href="mailto:support@tivvity.com" class="text-gray-400 text-sm hover:text-white transition">support@tivvity.com</a>
-                </div>
+    <footer class="site-footer border-t px-4 py-12" style="border-color:rgba(255,255,255,0.05);background:#0A0A0F;">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2">
+                <img src="./logo.svg" alt="Tivvity" class="w-6 h-6">
+                <span class="text-sm font-bold text-white">Tivvity</span>
+                <span class="text-gray-700 text-sm ml-1">© 2026 Kirk Owens</span>
             </div>
-            
-            <!-- Bottom Footer -->
-            <div class="border-t border-dark-border pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2026 Tivvity</p>
-                <p class="mt-1">Built by Kirk Owens</p>
-            </div>
+            <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-600">
+                <a href="#features" class="hover:text-gray-300 transition">Features</a>
+                <a href="#faq" class="hover:text-gray-300 transition">FAQ</a>
+                <a href="./privacy.html" class="hover:text-gray-300 transition">Privacy</a>
+                <a href="./terms.html" class="hover:text-gray-300 transition">Terms</a>
+                <a href="mailto:support@tivvity.com" class="hover:text-gray-300 transition">Contact</a>
+            </nav>
         </div>
     </footer>
 
     <!-- Google Play Beta Modal -->
     <div id="beta-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-dark-card border-2 border-primary/30 rounded-2xl max-w-md w-full p-8 relative">
-            <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="modal-panel rounded-3xl max-w-md w-full p-8 relative" style="background:#13131A;border:1px solid rgba(255,255,255,0.08);">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-white transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-            
-            <!-- Form State -->
+
             <div id="beta-form-state">
-                <h3 class="text-2xl font-bold text-white mb-3">Join Android Closed Beta</h3>
-                <p class="text-gray-300 mb-4">Get early access to Tivvity on Android and receive <span class="text-primary font-semibold">Tivvity Pro lifetime for free</span>!</p>
-                
-                <div class="bg-primary/10 border border-primary/30 rounded-lg p-3 mb-6">
-                    <p class="text-sm text-gray-300 text-center">
-                        <span class="text-primary font-bold text-lg">4/12</span> spots filled
-                    </p>
+                <h3 class="text-xl font-bold text-white mb-2">Join Android Closed Beta</h3>
+                <p class="text-gray-500 text-sm mb-5">Get early access and receive <span class="text-purple-400 font-semibold">Tivvity Pro lifetime for free</span>.</p>
+
+                <div class="bg-primary/10 border border-primary/20 rounded-xl p-3 mb-5 text-center">
+                    <span class="text-purple-400 font-bold">4/12</span> <span class="text-gray-500 text-sm">spots filled</span>
                 </div>
-                
+
                 <form id="beta-form">
-                    <input 
-                        type="email" 
-                        id="beta-email" 
-                        name="email" 
-                        placeholder="Enter your Google Play email" 
+                    <input
+                        type="email"
+                        id="beta-email"
+                        name="email"
+                        placeholder="Your Google Play email"
                         required
-                        class="w-full px-4 py-3 rounded-xl bg-dark-bg border-2 border-dark-border text-white placeholder-gray-400 focus:outline-none focus:border-primary transition mb-2"
+                        class="w-full px-4 py-3 rounded-xl text-white text-sm placeholder-gray-600 focus:outline-none focus:border-primary transition mb-2"
+                        style="background:#0A0A0F;border:1px solid rgba(255,255,255,0.08);"
                     >
-                    <p class="text-xs text-gray-400 mb-4">Use the email linked to your Google Play account. This ensures you can access the beta when we add you to the closed testers list.</p>
-                    <button 
-                        type="submit" 
-                        class="w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl font-semibold text-lg transition"
-                    >
+                    <p class="text-xs text-gray-600 mb-4">Use the email linked to your Google Play account.</p>
+                    <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full font-semibold text-sm transition">
                         Join Beta Program
                     </button>
-                    <p id="beta-message" class="mt-3 text-sm text-center"></p>
+                    <p id="beta-message" class="mt-3 text-xs text-center"></p>
                 </form>
             </div>
 
-            <!-- Success State -->
             <div id="beta-success-state" class="hidden text-center">
-                <div class="mb-6">
-                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">You're In! 🎉</h3>
-                    <p class="text-gray-300 mb-4">Check your email for the Android beta link and the steps to get your <span class="text-primary font-semibold">lifetime Pro access</span> for free!</p>
-                    <p class="text-sm text-gray-400">We've added you to the closed testers list. You should receive access within a few minutes.</p>
+                <div class="w-14 h-14 bg-primary/15 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
                 </div>
-                <button 
-                    id="success-close-btn"
-                    class="w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl font-semibold text-lg transition"
-                >
-                    Got it!
-                </button>
+                <h3 class="text-xl font-bold text-white mb-2">You're in!</h3>
+                <p class="text-gray-500 text-sm mb-6">Check your email for the beta link and instructions to claim your <span class="text-purple-400 font-semibold">lifetime Pro</span> access.</p>
+                <button id="success-close-btn" class="w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full font-semibold text-sm transition">Got it</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Modal functions
+        /* ── Theme toggle ── */
+        const html       = document.documentElement;
+        const toggleBtn  = document.getElementById('theme-toggle');
+        const iconSun    = document.getElementById('icon-sun');
+        const iconMoon   = document.getElementById('icon-moon');
+
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                html.setAttribute('data-theme', 'light');
+                iconSun.classList.add('hidden');
+                iconMoon.classList.remove('hidden');
+            } else {
+                html.removeAttribute('data-theme');
+                iconSun.classList.remove('hidden');
+                iconMoon.classList.add('hidden');
+            }
+            document.querySelectorAll('.theme-img').forEach(function(img) {
+                img.src = theme === 'light' ? img.dataset.light : img.dataset.dark;
+            });
+        }
+
+        function toggleTheme() {
+            const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            localStorage.setItem('tivvity-theme', next);
+            applyTheme(next);
+        }
+
+        toggleBtn.addEventListener('click', toggleTheme);
+
+        /* Apply saved theme on load (before first paint) */
+        const saved = localStorage.getItem('tivvity-theme');
+        if (saved) applyTheme(saved);
+
         function openBetaModal() {
             const modal = document.getElementById('beta-modal');
             modal.classList.remove('hidden');
@@ -727,103 +743,85 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal on X button click
         document.getElementById('close-modal').addEventListener('click', closeBetaModal);
-
-        // Close modal on backdrop click
         document.getElementById('beta-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeBetaModal();
-            }
+            if (e.target === this) closeBetaModal();
         });
-
-        // Close modal on Escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeBetaModal();
-            }
+            if (e.key === 'Escape') closeBetaModal();
         });
 
-        // Handle beta form submission
         document.getElementById('beta-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const emailInput = document.getElementById('beta-email');
             const submitButton = this.querySelector('button[type="submit"]');
             const messageElement = document.getElementById('beta-message');
             const email = emailInput.value;
 
-            // Disable button during submission
             submitButton.disabled = true;
             submitButton.textContent = 'Joining...';
 
             try {
-                // Add contact to Brevo list via serverless function
                 const response = await fetch('/api/subscribe', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        platform: 'android'
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, platform: 'android' })
                 });
 
                 if (response.ok) {
-                    // Hide form state and show success state
                     document.getElementById('beta-form-state').classList.add('hidden');
                     document.getElementById('beta-success-state').classList.remove('hidden');
-                    
-                    // Reset form for next time
                     this.reset();
                 } else {
                     throw new Error('Submission failed');
                 }
             } catch (error) {
-                // Show error message
-                messageElement.textContent = 'Something went wrong. Please try again or email us at support@tivvity.com';
+                messageElement.textContent = 'Something went wrong. Email support@tivvity.com';
                 messageElement.style.color = '#EF4444';
             } finally {
-                // Re-enable button
                 submitButton.disabled = false;
                 submitButton.textContent = 'Join Beta Program';
             }
         });
 
-        // Handle success 'Got it!' button
         document.getElementById('success-close-btn').addEventListener('click', function() {
-            // Hide success state and show form state for next time
             document.getElementById('beta-success-state').classList.add('hidden');
             document.getElementById('beta-form-state').classList.remove('hidden');
-            
-            // Close modal
             closeBetaModal();
         });
 
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const href = this.getAttribute('href');
-                
-                // If href is just "#", scroll to top
                 if (href === '#') {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
                     const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
+        document.querySelectorAll('.faq-trigger').forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const item = this.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
     </script>
 </body>
 </html>
