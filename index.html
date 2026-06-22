@@ -280,6 +280,7 @@
             transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.2s ease;
         }
         .log-tab.active-tab .log-tab-desc { max-height: 3rem; opacity: 1; margin-top: 0.3rem; }
+        @media (max-width: 639px) { .log-tab-desc { display: none !important; } }
 
         [data-theme="light"] .log-tab { background: rgba(255,255,255,0.97); border-color: rgba(0,0,0,0.07); color: #6B7280; }
         [data-theme="light"] .log-tab:hover { color: #374151; border-color: rgba(139,92,246,0.3); }
@@ -589,22 +590,25 @@
                 <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-10">Three ways to log your time</h3>
 
                 <!-- Tabs + phone side by side -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-10">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
 
-                    <!-- Left: vertical tab buttons -->
-                    <div class="flex flex-col gap-3 w-full sm:w-auto">
-                        <button class="log-tab active-tab w-full sm:w-56 px-5 py-3.5 rounded-2xl text-left transition-all duration-200" data-tab="manual">
-                            <span class="block text-sm font-semibold">Manual Entry</span>
-                            <span class="log-tab-desc">Log past time</span>
-                        </button>
-                        <button class="log-tab w-full sm:w-56 px-5 py-3.5 rounded-2xl text-left transition-all duration-200" data-tab="timer">
-                            <span class="block text-sm font-semibold">Timer</span>
-                            <span class="log-tab-desc">Count down from a set duration</span>
-                        </button>
-                        <button class="log-tab w-full sm:w-56 px-5 py-3.5 rounded-2xl text-left transition-all duration-200" data-tab="stopwatch">
-                            <span class="block text-sm font-semibold">Stopwatch</span>
-                            <span class="log-tab-desc">Track time as it happens</span>
-                        </button>
+                    <!-- Tab buttons -->
+                    <div class="flex flex-col items-center gap-2 w-full sm:w-auto sm:items-stretch">
+                        <div class="flex flex-row sm:flex-col gap-2 sm:gap-3 w-full">
+                            <button class="log-tab active-tab flex-1 sm:flex-none sm:w-56 px-2 sm:px-5 py-2.5 sm:py-3.5 rounded-2xl text-center sm:text-left transition-all duration-200" data-tab="manual">
+                                <span class="block text-xs sm:text-sm font-semibold">Manual Entry</span>
+                                <span class="log-tab-desc">Log past time</span>
+                            </button>
+                            <button class="log-tab flex-1 sm:flex-none sm:w-56 px-2 sm:px-5 py-2.5 sm:py-3.5 rounded-2xl text-center sm:text-left transition-all duration-200" data-tab="timer">
+                                <span class="block text-xs sm:text-sm font-semibold">Timer</span>
+                                <span class="log-tab-desc">Count down from a set duration</span>
+                            </button>
+                            <button class="log-tab flex-1 sm:flex-none sm:w-56 px-2 sm:px-5 py-2.5 sm:py-3.5 rounded-2xl text-center sm:text-left transition-all duration-200" data-tab="stopwatch">
+                                <span class="block text-xs sm:text-sm font-semibold">Stopwatch</span>
+                                <span class="log-tab-desc">Track time as it happens</span>
+                            </button>
+                        </div>
+                        <p id="log-mobile-desc" class="sm:hidden text-sm text-gray-400 text-center">Log past time</p>
                     </div>
 
                     <!-- Right: phone mockup -->
@@ -1033,6 +1037,9 @@
                 const tab = this.dataset.tab;
                 document.querySelectorAll('.log-tab').forEach(b => b.classList.remove('active-tab'));
                 this.classList.add('active-tab');
+                var mobileDesc = document.getElementById('log-mobile-desc');
+                var mobileDefs = { manual: 'Log past time', timer: 'Count down from a set duration', stopwatch: 'Track time as it happens' };
+                if (mobileDesc) mobileDesc.textContent = mobileDefs[tab];
                 ['manual', 'timer', 'stopwatch'].forEach(key => {
                     const vid = document.getElementById('log-video-' + key);
                     if (key === tab) {
