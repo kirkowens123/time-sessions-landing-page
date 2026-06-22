@@ -298,8 +298,45 @@
         [data-theme="light"] .mobile-nav-btn { background: rgba(0,0,0,0.07); color: #6B7280; }
         [data-theme="light"] .mobile-nav-btn:active { background: rgba(0,0,0,0.12); color: #09090F; }
         @media (hover: hover) { [data-theme="light"] .mobile-nav-btn:hover { background: rgba(0,0,0,0.12); color: #09090F; } }
-        .mobile-nav-link:hover { background: rgba(255,255,255,0.05); }
-        [data-theme="light"] .mobile-nav-link:hover { background: rgba(0,0,0,0.04); }
+        .mobile-nav-link { color: #9CA3AF; }
+        .mobile-nav-link:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        [data-theme="light"] .mobile-nav-link { color: #374151; }
+        [data-theme="light"] .mobile-nav-link:hover { background: rgba(0,0,0,0.04); color: #09090F; }
+
+        /* ──── Mobile menu dropdown ──── */
+        #mobile-menu {
+            background: rgba(13,13,18,0.97);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        [data-theme="light"] #mobile-menu {
+            background: rgba(248,248,252,0.98);
+            border-color: rgba(0,0,0,0.08);
+        }
+
+        /* ──── Animated hamburger ──── */
+        .hamburger-icon {
+            position: relative;
+            width: 18px;
+            height: 13px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        .ham-line {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            border-radius: 1px;
+            transition: transform 0.25s ease, opacity 0.2s ease;
+            transform-origin: center;
+        }
+        .mobile-nav-btn.is-open .ham-top { transform: translateY(5.5px) rotate(45deg); }
+        .mobile-nav-btn.is-open .ham-mid { opacity: 0; transform: scaleX(0); }
+        .mobile-nav-btn.is-open .ham-bot { transform: translateY(-5.5px) rotate(-45deg); }
 
         /* ──── Theme toggle button ──── */
         .theme-toggle {
@@ -355,8 +392,11 @@
             <!-- Right: hamburger + theme -->
             <div class="flex md:hidden items-center gap-2 justify-self-end">
                 <button id="mobile-menu-btn" aria-label="Open menu" class="mobile-nav-btn">
-                    <svg id="mobile-menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                    <svg id="mobile-close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                    <span class="hamburger-icon">
+                        <span class="ham-line ham-top"></span>
+                        <span class="ham-line ham-mid"></span>
+                        <span class="ham-line ham-bot"></span>
+                    </span>
                 </button>
                 <button id="theme-toggle-mobile" class="theme-toggle" aria-label="Toggle theme">
                     <svg id="icon-sun-mobile" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -365,7 +405,7 @@
             </div>
         </div>
         <!-- Mobile dropdown -->
-        <div id="mobile-menu" class="hidden mx-auto mt-2 rounded-2xl overflow-hidden" style="max-width:52rem;background:rgba(13,13,18,0.97);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(20px);">
+        <div id="mobile-menu" class="hidden mx-auto mt-2 rounded-2xl overflow-hidden" style="max-width:52rem;">
             <div class="px-3 py-3 flex flex-col gap-1">
                 <a href="#how-it-works" class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white transition">How It Works</a>
                 <a href="#faq" class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white transition">FAQ</a>
@@ -814,20 +854,16 @@
         toggleBtnMobile.addEventListener('click', toggleTheme);
 
         /* Hamburger menu toggle */
-        const mobileMenuBtn   = document.getElementById('mobile-menu-btn');
-        const mobileMenu      = document.getElementById('mobile-menu');
-        const mobileMenuIcon  = document.getElementById('mobile-menu-icon');
-        const mobileCloseIcon = document.getElementById('mobile-close-icon');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu    = document.getElementById('mobile-menu');
         mobileMenuBtn.addEventListener('click', function() {
-            const open = mobileMenu.classList.toggle('hidden');
-            mobileMenuIcon.classList.toggle('hidden', !open);
-            mobileCloseIcon.classList.toggle('hidden', open);
+            const isOpen = mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.classList.toggle('is-open', !isOpen);
         });
         document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
             link.addEventListener('click', function() {
                 mobileMenu.classList.add('hidden');
-                mobileMenuIcon.classList.remove('hidden');
-                mobileCloseIcon.classList.add('hidden');
+                mobileMenuBtn.classList.remove('is-open');
             });
         });
 
