@@ -327,12 +327,14 @@
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 px-2 md:px-4 pt-4">
-        <div class="nav-pill mx-auto pl-5 pr-2 py-2 flex items-center justify-between rounded-full" style="max-width:52rem;">
-            <a href="#" class="flex items-center gap-2 hover:opacity-80 transition">
+        <!-- Mobile: 3-column grid. Desktop: flex row -->
+        <div class="nav-pill mx-auto px-3 py-2 grid md:flex md:items-center md:justify-between md:px-8 md:py-3.5 rounded-full" style="max-width:52rem;grid-template-columns:1fr auto 1fr;">
+            <!-- Left: logo -->
+            <a href="#" class="flex items-center gap-2 hover:opacity-80 transition justify-self-start">
                 <img src="./photos/logo.svg" alt="Tivvity" class="nav-logo w-5 h-5 md:w-8 md:h-8">
                 <span class="text-lg font-bold text-white tracking-tight">Tivvity</span>
             </a>
-            <!-- Desktop links -->
+            <!-- Center: Download (mobile) / Desktop links -->
             <div class="hidden md:flex items-center gap-6">
                 <a href="#how-it-works" class="text-base text-gray-400 hover:text-white transition font-medium">How It Works</a>
                 <a href="#faq" class="text-base text-gray-400 hover:text-white transition font-medium">FAQ</a>
@@ -341,12 +343,12 @@
                     Download
                 </a>
             </div>
-            <!-- Mobile controls -->
-            <div class="flex md:hidden items-center gap-2">
-                <a href="https://apps.apple.com/us/app/tivvity-time-habit-tracker/id6755462279" target="_blank" rel="noopener noreferrer"
-                   class="bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition">
-                    Download
-                </a>
+            <a href="https://apps.apple.com/us/app/tivvity-time-habit-tracker/id6755462279" target="_blank" rel="noopener noreferrer"
+               class="md:hidden bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition justify-self-center">
+                Download
+            </a>
+            <!-- Right: hamburger + theme -->
+            <div class="flex md:hidden items-center gap-2 justify-self-end">
                 <button id="mobile-menu-btn" aria-label="Open menu" class="mobile-nav-btn">
                     <svg id="mobile-menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     <svg id="mobile-close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -388,7 +390,7 @@
 
             <!-- Headline -->
             <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-white mb-6">
-                Visualize<br class="sm:hidden"> your <span class="gradient-text">life.</span>
+                Visualize your <span class="gradient-text">life.</span>
             </h1>
 
             <!-- Subheadline -->
