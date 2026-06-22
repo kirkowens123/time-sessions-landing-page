@@ -1047,6 +1047,35 @@
             });
         });
 
+        /* ── Reset videos on scroll into view ── */
+        (function() {
+            var soloIds = ['dashboard-detail-video', 'cal-video', 'goals-video'];
+            soloIds.forEach(function(id) {
+                var vid = document.getElementById(id);
+                if (!vid) return;
+                var target = vid.closest('.phone-mockup') || vid;
+                new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        vid.currentTime = 0;
+                        vid.play();
+                    }
+                }, { threshold: 0.4 }).observe(target);
+            });
+
+            var logSection = document.getElementById('how-it-works');
+            if (logSection) {
+                new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        var activeTab = document.querySelector('.log-tab.active-tab');
+                        if (activeTab) {
+                            var vid = document.getElementById('log-video-' + activeTab.dataset.tab);
+                            if (vid) { vid.currentTime = 0; vid.play(); }
+                        }
+                    }
+                }, { threshold: 0.3 }).observe(logSection);
+            }
+        })();
+
         /* ── Goals full-video progress ── */
         (function() {
             var goalsVid = document.getElementById('goals-video');
