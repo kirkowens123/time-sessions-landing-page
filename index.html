@@ -286,15 +286,15 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border: 1px solid var(--nav-border);
-            background: var(--nav-bg);
-            color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.07);
+            color: #E5E7EB;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
         }
-        .mobile-nav-btn:hover { color: #fff; background: rgba(255,255,255,0.07); }
-        [data-theme="light"] .mobile-nav-btn { border-color: rgba(0,0,0,0.1); color: #6B7280; }
-        [data-theme="light"] .mobile-nav-btn:hover { background: rgba(0,0,0,0.05); color: #09090F; }
+        .mobile-nav-btn:hover { color: #fff; background: rgba(255,255,255,0.12); }
+        [data-theme="light"] .mobile-nav-btn { border-color: rgba(0,0,0,0.1); background: rgba(0,0,0,0.04); color: #374151; }
+        [data-theme="light"] .mobile-nav-btn:hover { background: rgba(0,0,0,0.08); color: #09090F; }
         .mobile-nav-link:hover { background: rgba(255,255,255,0.05); }
         [data-theme="light"] .mobile-nav-link:hover { background: rgba(0,0,0,0.04); }
 
@@ -331,7 +331,7 @@
     <nav class="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
         <div class="nav-pill mx-auto px-5 py-3 flex items-center justify-between rounded-full" style="max-width:52rem;">
             <a href="#" class="flex items-center gap-2 hover:opacity-80 transition">
-                <img src="./photos/logo.svg" alt="Tivvity" class="nav-logo w-8 h-8">
+                <img src="./photos/logo.svg" alt="Tivvity" class="nav-logo w-6 h-6 md:w-8 md:h-8">
                 <span class="text-lg font-bold text-white tracking-tight">Tivvity</span>
             </a>
             <!-- Desktop links -->
