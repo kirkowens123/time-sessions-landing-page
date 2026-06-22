@@ -309,6 +309,15 @@
             border: 1px solid rgba(255,255,255,0.08);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            opacity: 0;
+            transform: translateY(-6px) scale(0.98);
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        #mobile-menu.menu-open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
         }
         [data-theme="light"] #mobile-menu {
             background: rgba(248,248,252,0.98);
@@ -405,7 +414,7 @@
             </div>
         </div>
         <!-- Mobile dropdown -->
-        <div id="mobile-menu" class="hidden mx-auto mt-2 rounded-2xl overflow-hidden" style="max-width:52rem;">
+        <div id="mobile-menu" class="mx-auto mt-2 rounded-2xl overflow-hidden" style="max-width:52rem;">
             <div class="px-3 py-3 flex flex-col gap-1">
                 <a href="#how-it-works" class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white transition">How It Works</a>
                 <a href="#faq" class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white transition">FAQ</a>
@@ -857,12 +866,12 @@
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu    = document.getElementById('mobile-menu');
         mobileMenuBtn.addEventListener('click', function() {
-            const isOpen = mobileMenu.classList.toggle('hidden');
-            mobileMenuBtn.classList.toggle('is-open', !isOpen);
+            const isOpen = mobileMenu.classList.toggle('menu-open');
+            mobileMenuBtn.classList.toggle('is-open', isOpen);
         });
         document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
             link.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('menu-open');
                 mobileMenuBtn.classList.remove('is-open');
             });
         });
