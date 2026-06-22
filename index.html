@@ -306,8 +306,8 @@
 
         /* ──── Mobile menu dropdown ──── */
         #mobile-menu {
-            background: rgba(13,13,18,0.97);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: var(--nav-bg);
+            border: 1px solid var(--nav-border);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             opacity: 0;
@@ -319,10 +319,6 @@
             opacity: 1;
             transform: translateY(0) scale(1);
             pointer-events: auto;
-        }
-        [data-theme="light"] #mobile-menu {
-            background: rgba(248,248,252,0.98);
-            border-color: rgba(0,0,0,0.08);
         }
 
         /* ──── Animated hamburger ──── */
