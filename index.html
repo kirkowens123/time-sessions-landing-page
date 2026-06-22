@@ -286,15 +286,19 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.07);
-            color: #E5E7EB;
+            border: 1px solid var(--nav-border);
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.05) inset;
+            color: #9CA3AF;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            flex-shrink: 0;
         }
-        .mobile-nav-btn:hover { color: #fff; background: rgba(255,255,255,0.12); }
-        [data-theme="light"] .mobile-nav-btn { border-color: rgba(0,0,0,0.1); background: rgba(0,0,0,0.04); color: #374151; }
-        [data-theme="light"] .mobile-nav-btn:hover { background: rgba(0,0,0,0.08); color: #09090F; }
+        .mobile-nav-btn:hover { background: rgba(30,30,40,0.85); color: #fff; }
+        [data-theme="light"] .mobile-nav-btn { box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1px 0 rgba(255,255,255,0.8) inset; color: #6B7280; }
+        [data-theme="light"] .mobile-nav-btn:hover { background: rgba(240,240,248,0.95); color: #09090F; }
         .mobile-nav-link:hover { background: rgba(255,255,255,0.05); }
         [data-theme="light"] .mobile-nav-link:hover { background: rgba(0,0,0,0.04); }
 
