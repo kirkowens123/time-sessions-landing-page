@@ -287,15 +287,15 @@
             height: 36px;
             border-radius: 50%;
             border: none;
-            background: #2D2D35;
+            background: rgba(255,255,255,0.08);
             color: #9CA3AF;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
             flex-shrink: 0;
         }
-        .mobile-nav-btn:hover { background: #3A3A45; color: #fff; }
-        [data-theme="light"] .mobile-nav-btn { background: #E5E7EB; color: #6B7280; }
-        [data-theme="light"] .mobile-nav-btn:hover { background: #D1D5DB; color: #09090F; }
+        .mobile-nav-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+        [data-theme="light"] .mobile-nav-btn { background: rgba(0,0,0,0.07); color: #6B7280; }
+        [data-theme="light"] .mobile-nav-btn:hover { background: rgba(0,0,0,0.12); color: #09090F; }
         .mobile-nav-link:hover { background: rgba(255,255,255,0.05); }
         [data-theme="light"] .mobile-nav-link:hover { background: rgba(0,0,0,0.04); }
 
@@ -308,15 +308,15 @@
             height: 40px;
             border-radius: 50%;
             border: none;
-            background: #2D2D35;
+            background: rgba(255,255,255,0.08);
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
             color: #9CA3AF;
             flex-shrink: 0;
         }
-        .theme-toggle:hover { background: #3A3A45; color: #fff; }
-        [data-theme="light"] .theme-toggle { background: #E5E7EB; color: #6B7280; }
-        [data-theme="light"] .theme-toggle:hover { background: #D1D5DB; color: #09090F; }
+        .theme-toggle:hover { background: rgba(255,255,255,0.14); color: #fff; }
+        [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.07); color: #6B7280; }
+        [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.12); color: #09090F; }
 
         /* ──── Theme transition ──── */
         *, *::before, *::after { transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease; }
@@ -328,7 +328,7 @@
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 px-2 md:px-4 pt-4">
         <!-- Mobile: 3-column grid. Desktop: flex row -->
-        <div class="nav-pill mx-auto px-3 py-2 grid md:flex md:items-center md:justify-between md:px-8 md:py-3.5 rounded-full" style="max-width:52rem;grid-template-columns:1fr auto 1fr;">
+        <div class="nav-pill mx-auto px-2 py-1.5 grid md:flex md:items-center md:justify-between md:px-8 md:py-3.5 rounded-full" style="max-width:52rem;grid-template-columns:1fr auto 1fr;">
             <!-- Left: logo -->
             <a href="#" class="flex items-center gap-2 hover:opacity-80 transition justify-self-start">
                 <img src="./photos/logo.svg" alt="Tivvity" class="nav-logo w-5 h-5 md:w-8 md:h-8">
