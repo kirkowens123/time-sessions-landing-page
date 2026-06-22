@@ -215,6 +215,7 @@
 
         /* ──── Light-mode text & colour overrides ──── */
         [data-theme="light"] .text-white            { color: var(--text-head) !important; }
+        [data-theme="light"] .hover\:text-white:hover { color: var(--text-head) !important; }
 
         /* Gray scale — remap so hierarchy still reads on light bg */
         [data-theme="light"] .text-gray-400         { color: #4B5563 !important; } /* nav links, subheadlines */
@@ -222,10 +223,8 @@
         [data-theme="light"] .text-gray-600         { color: #6B7280 !important; } /* fine print / whisper text */
         [data-theme="light"] .text-gray-700         { color: #4B5563 !important; } /* footer copyright */
 
-        /* Nav logo — convert white SVG to brand purple in light mode */
-        [data-theme="light"] .nav-logo {
-            filter: brightness(0) saturate(100%) invert(44%) sepia(87%) saturate(1141%) hue-rotate(231deg) brightness(101%) contrast(96%);
-        }
+        /* Nav logo — light mode SVG has more padding so scale it up */
+        [data-theme="light"] .nav-logo { transform: scale(1.3); }
 
         /* Keep white text on purple buttons regardless of the .text-white override */
         [data-theme="light"] .bg-primary            { color: #FFFFFF !important; }
@@ -273,10 +272,19 @@
             border-color: transparent;
             box-shadow: 0 4px 14px rgba(139,92,246,0.35);
         }
+        .log-tab-desc {
+            display: block; overflow: hidden;
+            max-height: 0; opacity: 0; margin-top: 0;
+            font-size: 0.75rem; line-height: 1.4; font-weight: 400;
+            color: rgba(255,255,255,0.75);
+            transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.2s ease;
+        }
+        .log-tab.active-tab .log-tab-desc { max-height: 3rem; opacity: 1; margin-top: 0.3rem; }
 
         [data-theme="light"] .log-tab { background: rgba(255,255,255,0.97); border-color: rgba(0,0,0,0.07); color: #6B7280; }
         [data-theme="light"] .log-tab:hover { color: #374151; border-color: rgba(139,92,246,0.3); }
         [data-theme="light"] .log-tab.active-tab { color: #FFFFFF; background: #8B5CF6; }
+        [data-theme="light"] .log-tab.active-tab .log-tab-desc { color: rgba(255,255,255,0.85); }
 
         /* ──── Mobile nav button ──── */
         .mobile-nav-btn {
@@ -365,6 +373,17 @@
         [data-theme="light"] .theme-toggle:active { background: rgba(139,92,246,0.2); color: #6D28D9; }
         @media (hover: hover) { [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.12); color: #09090F; } }
 
+        /* ──── Calendar step highlight ──── */
+        .cal-step { opacity: 0.35; transition: opacity 0.3s ease; }
+        .cal-step.active { opacity: 1; }
+        .cal-step p { color: #9CA3AF; transition: color 0.3s ease; }
+        .cal-step.active p { color: #fff; }
+        [data-theme="light"] .cal-step p { color: #6B7280; }
+        [data-theme="light"] .cal-step.active p { color: #09090F; }
+        .cal-bar { height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; margin-top: 6px; overflow: hidden; }
+        [data-theme="light"] .cal-bar { background: rgba(0,0,0,0.1); }
+        .cal-bar-fill { height: 100%; width: 0%; background: #8B5CF6; border-radius: 1px; transition: width 0.25s linear; }
+
         /* ──── Theme transition ──── */
         *, *::before, *::after { transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease; }
         .phone-mockup, .phone-mockup * { transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
@@ -378,7 +397,7 @@
         <div class="nav-pill mx-auto pl-4 pr-2 py-1.5 grid md:flex md:items-center md:justify-between md:px-8 md:py-3.5 rounded-full" style="max-width:52rem;grid-template-columns:1fr auto 1fr;">
             <!-- Left: logo -->
             <a href="#" class="flex items-center gap-2 hover:opacity-80 transition justify-self-start">
-                <img src="./photos/logo.svg" alt="Tivvity" class="nav-logo w-5 h-5 md:w-8 md:h-8 theme-img" data-dark="./photos/logo.svg" data-light="./photos/logo-light.png">
+                <img src="./photos/logo.svg" alt="Tivvity" class="nav-logo w-5 h-5 md:w-8 md:h-8 object-contain theme-img" data-dark="./photos/logo.svg" data-light="./photos/logo-light.svg">
                 <span class="text-lg font-bold text-white tracking-tight">Tivvity</span>
             </a>
             <!-- Center: Download (mobile) / Desktop links -->
@@ -574,10 +593,18 @@
 
                     <!-- Left: vertical tab buttons -->
                     <div class="flex flex-col gap-3 w-full sm:w-auto">
-                        <button class="log-tab active-tab w-full sm:w-48 px-5 py-3.5 rounded-2xl text-sm font-semibold text-left transition-all duration-200" data-tab="manual">Manual Entry</button>
-                        <button class="log-tab w-full sm:w-48 px-5 py-3.5 rounded-2xl text-sm font-semibold text-left transition-all duration-200" data-tab="timer">Timer</button>
-                        <button class="log-tab w-full sm:w-48 px-5 py-3.5 rounded-2xl text-sm font-semibold text-left transition-all duration-200" data-tab="stopwatch">Stopwatch</button>
-                        <p id="log-tab-desc" class="text-xs text-gray-500 max-w-[12rem] mt-2 leading-relaxed">Log past time</p>
+                        <button class="log-tab active-tab w-full sm:w-56 px-5 py-3.5 rounded-2xl text-left transition-all duration-200" data-tab="manual">
+                            <span class="block text-sm font-semibold">Manual Entry</span>
+                            <span class="log-tab-desc">Log past time</span>
+                        </button>
+                        <button class="log-tab w-full sm:w-56 px-5 py-3.5 rounded-2xl text-left transition-all duration-200" data-tab="timer">
+                            <span class="block text-sm font-semibold">Timer</span>
+                            <span class="log-tab-desc">Count down from a set duration</span>
+                        </button>
+                        <button class="log-tab w-full sm:w-56 px-5 py-3.5 rounded-2xl text-left transition-all duration-200" data-tab="stopwatch">
+                            <span class="block text-sm font-semibold">Stopwatch</span>
+                            <span class="log-tab-desc">Track time as it happens</span>
+                        </button>
                     </div>
 
                     <!-- Right: phone mockup -->
@@ -596,14 +623,25 @@
             <!-- Dashboard Detail video -->
             <div class="mt-24 fade-in">
                 <p class="text-center text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Deep dive</p>
-                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">Understand where your time goes</h3>
-                <p class="text-center text-gray-500 text-base mb-12 max-w-md mx-auto">Dive into any category or activity and see how much time you've spent over any period. View Insights to compare your time to prior periods.</p>
+                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-10">Understand where your time goes</h3>
 
-                <div class="flex justify-center">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-16">
+                    <!-- Phone -->
                     <div class="phone-mockup flex-shrink-0" style="width:260px;height:530px;">
                         <div class="phone-notch"></div>
                         <div class="phone-screen">
                             <video id="dashboard-detail-video" src="./videos/dashboard-detail-dark.MP4" data-dark="./videos/dashboard-detail-dark.MP4" data-light="./videos/dashboard-detail-light.MP4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                        </div>
+                    </div>
+                    <!-- Right: subtext -->
+                    <div id="dash-steps" class="flex flex-col gap-5 max-w-xs">
+                        <div class="cal-step active text-center sm:text-left">
+                            <p class="text-base sm:text-lg leading-relaxed">View dashboard detail for any category or activity.</p>
+                            <div class="cal-bar"><div class="cal-bar-fill"></div></div>
+                        </div>
+                        <div class="cal-step text-center sm:text-left">
+                            <p class="text-base sm:text-lg leading-relaxed">View different time periods.</p>
+                            <div class="cal-bar"><div class="cal-bar-fill"></div></div>
                         </div>
                     </div>
                 </div>
@@ -612,14 +650,25 @@
             <!-- Calendar Entry video -->
             <div class="mt-24 fade-in">
                 <p class="text-center text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Calendar</p>
-                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">Add time to your calendar</h3>
-                <p class="text-center text-gray-500 text-base mb-12 max-w-md mx-auto">Easily add and change the time of your activities in your calendar.</p>
+                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-10">Add time to your calendar</h3>
 
-                <div class="flex justify-center">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-16">
+                    <!-- Phone -->
                     <div class="phone-mockup flex-shrink-0" style="width:260px;height:530px;">
                         <div class="phone-notch"></div>
                         <div class="phone-screen">
-                            <video src="./videos/calendar-entry-dark.MP4" data-dark="./videos/calendar-entry-dark.MP4" data-light="./videos/calendar-entry-light.MP4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                            <video id="cal-video" src="./videos/calendar-entry-dark.MP4" data-dark="./videos/calendar-entry-dark.MP4" data-light="./videos/calendar-entry-light.MP4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                        </div>
+                    </div>
+                    <!-- Right: subtext -->
+                    <div id="cal-steps" class="flex flex-col gap-5 max-w-xs">
+                        <div class="cal-step active text-center sm:text-left">
+                            <p class="text-base sm:text-lg leading-relaxed">Easily add time to your calendar.</p>
+                            <div class="cal-bar"><div class="cal-bar-fill"></div></div>
+                        </div>
+                        <div class="cal-step text-center sm:text-left">
+                            <p class="text-base sm:text-lg leading-relaxed">Edit the duration if anything changes.</p>
+                            <div class="cal-bar"><div class="cal-bar-fill"></div></div>
                         </div>
                     </div>
                 </div>
@@ -628,14 +677,21 @@
             <!-- Goals video -->
             <div class="mt-24 fade-in">
                 <p class="text-center text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Goals</p>
-                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">Track your progress</h3>
-                <p class="text-center text-gray-500 text-base mb-12 max-w-md mx-auto">Set weekly, monthly, and yearly goals.</p>
+                <h3 class="text-center text-4xl sm:text-5xl font-bold text-white tracking-tight mb-10">Track your progress</h3>
 
-                <div class="flex justify-center">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-16">
+                    <!-- Phone -->
                     <div class="phone-mockup flex-shrink-0" style="width:260px;height:530px;">
                         <div class="phone-notch"></div>
                         <div class="phone-screen">
-                            <video src="./videos/goals-dark.MP4" data-dark="./videos/goals-dark.MP4" data-light="./videos/goals-light.MP4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                            <video id="goals-video" src="./videos/goals-dark.MP4" data-dark="./videos/goals-dark.MP4" data-light="./videos/goals-light.MP4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                        </div>
+                    </div>
+                    <!-- Right: subtext -->
+                    <div id="goals-steps" class="flex flex-col gap-5 max-w-xs">
+                        <div class="cal-step active text-center sm:text-left">
+                            <p class="text-base sm:text-lg leading-relaxed">Set weekly, monthly, and yearly goals.</p>
+                            <div class="cal-bar"><div class="cal-bar-fill"></div></div>
                         </div>
                     </div>
                 </div>
@@ -753,16 +809,16 @@
     <footer class="site-footer border-t px-4 py-12" style="border-color:rgba(255,255,255,0.05);background:#0A0A0F;">
         <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-2">
-                <img src="./photos/logo.svg" alt="Tivvity" class="w-6 h-6">
+                <img src="./photos/logo.svg" alt="Tivvity" class="nav-logo w-6 h-6 object-contain theme-img" data-dark="./photos/logo.svg" data-light="./photos/logo-light.svg">
                 <span class="text-sm font-bold text-white">Tivvity</span>
                 <span class="text-gray-700 text-sm ml-1">© 2026 Kirk Owens</span>
             </div>
             <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-600">
-                <a href="#features" class="hover:text-gray-300 transition">Features</a>
+                <a href="#how-it-works" class="hover:text-gray-300 transition">How It Works</a>
                 <a href="#faq" class="hover:text-gray-300 transition">FAQ</a>
                 <a href="./privacy.html" class="hover:text-gray-300 transition">Privacy</a>
                 <a href="./terms.html" class="hover:text-gray-300 transition">Terms</a>
-                <a href="mailto:support@tivvity.com" class="hover:text-gray-300 transition">Contact</a>
+                <a href="./contact.html" class="hover:text-gray-300 transition">Contact</a>
             </nav>
         </div>
     </footer>
@@ -972,11 +1028,6 @@
         document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
         /* ── Log method tab toggle ── */
-        const tabDescs = {
-            manual: 'Log past time',
-            timer: 'Count down from a set duration',
-            stopwatch: 'Track time as it happens'
-        };
         document.querySelectorAll('.log-tab').forEach(btn => {
             btn.addEventListener('click', function() {
                 const tab = this.dataset.tab;
@@ -986,15 +1037,84 @@
                     const vid = document.getElementById('log-video-' + key);
                     if (key === tab) {
                         vid.classList.remove('hidden');
+                        vid.currentTime = 0;
                         vid.play();
                     } else {
                         vid.classList.add('hidden');
                         vid.pause();
                     }
                 });
-                document.getElementById('log-tab-desc').textContent = tabDescs[tab];
             });
         });
+
+        /* ── Goals full-video progress ── */
+        (function() {
+            var goalsVid = document.getElementById('goals-video');
+            var goalsBar = document.querySelector('#goals-steps .cal-bar-fill');
+            if (!goalsVid || !goalsBar) return;
+            function syncGoals() {
+                var dur = isNaN(goalsVid.duration) ? 20 : goalsVid.duration;
+                goalsBar.style.width = (goalsVid.currentTime / dur * 100) + '%';
+            }
+            goalsVid.addEventListener('timeupdate', syncGoals);
+            goalsVid.addEventListener('loadedmetadata', syncGoals);
+        })();
+
+        /* ── Dashboard detail step highlight ── */
+        (function() {
+            var dashVid = document.getElementById('dashboard-detail-video');
+            var dashSteps = document.querySelectorAll('#dash-steps .cal-step');
+            var DASH_BREAK = 14;
+            if (!dashVid || dashSteps.length < 2) return;
+
+            function syncDashSteps() {
+                var t = dashVid.currentTime;
+                var dur = isNaN(dashVid.duration) ? 20 : dashVid.duration;
+                var bar0 = dashSteps[0].querySelector('.cal-bar-fill');
+                var bar1 = dashSteps[1].querySelector('.cal-bar-fill');
+                if (t < DASH_BREAK) {
+                    dashSteps[0].classList.add('active');
+                    dashSteps[1].classList.remove('active');
+                    bar0.style.width = (t / DASH_BREAK * 100) + '%';
+                    bar1.style.width = '0%';
+                } else {
+                    dashSteps[0].classList.remove('active');
+                    dashSteps[1].classList.add('active');
+                    bar0.style.width = '100%';
+                    bar1.style.width = ((t - DASH_BREAK) / (dur - DASH_BREAK) * 100) + '%';
+                }
+            }
+            dashVid.addEventListener('timeupdate', syncDashSteps);
+            dashVid.addEventListener('loadedmetadata', syncDashSteps);
+        })();
+
+        /* ── Calendar step highlight ── */
+        (function() {
+            var calVid = document.getElementById('cal-video');
+            var calSteps = document.querySelectorAll('#cal-steps .cal-step');
+            var CAL_BREAK = 9;
+            if (!calVid || calSteps.length < 2) return;
+
+            function syncCalSteps() {
+                var t = calVid.currentTime;
+                var dur = isNaN(calVid.duration) ? 20 : calVid.duration;
+                var bar0 = calSteps[0].querySelector('.cal-bar-fill');
+                var bar1 = calSteps[1].querySelector('.cal-bar-fill');
+                if (t < CAL_BREAK) {
+                    calSteps[0].classList.add('active');
+                    calSteps[1].classList.remove('active');
+                    bar0.style.width = (t / CAL_BREAK * 100) + '%';
+                    bar1.style.width = '0%';
+                } else {
+                    calSteps[0].classList.remove('active');
+                    calSteps[1].classList.add('active');
+                    bar0.style.width = '100%';
+                    bar1.style.width = ((t - CAL_BREAK) / (dur - CAL_BREAK) * 100) + '%';
+                }
+            }
+            calVid.addEventListener('timeupdate', syncCalSteps);
+            calVid.addEventListener('loadedmetadata', syncCalSteps);
+        })();
     </script>
 </body>
 </html>

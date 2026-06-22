@@ -14,187 +14,307 @@
                     colors: {
                         primary: '#8B5CF6',
                         'primary-dark': '#7C3AED',
-                        'dark-bg': '#0D0D12',
-                        'dark-card': '#1A1A24',
-                        'dark-border': '#2D2D3D',
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; }
 
-        * {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        :root {
+            --bg:           #0A0A0F;
+            --card-bg:      rgba(19,19,26,0.8);
+            --card-border:  rgba(255,255,255,0.06);
+            --nav-bg:       rgba(19,19,26,0.55);
+            --nav-border:   rgba(255,255,255,0.1);
+            --text-head:    #FFFFFF;
+            --text-body:    #9CA3AF;
+        }
+        [data-theme="light"] {
+            --bg:           #F7F7FB;
+            --card-bg:      rgba(255,255,255,0.97);
+            --card-border:  rgba(0,0,0,0.07);
+            --nav-bg:       rgba(255,255,255,0.72);
+            --nav-border:   rgba(0,0,0,0.1);
+            --text-head:    #09090F;
+            --text-body:    #4B5563;
         }
 
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-        }
+        html, body { background-color: var(--bg); transition: background-color 0.25s ease; }
 
-        body {
-            background-color: #0D0D12;
+        .nav-pill {
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--nav-border);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.05) inset;
         }
+        [data-theme="light"] .nav-pill { box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1px 0 rgba(255,255,255,0.8) inset; }
 
-        .hero-gradient {
-            background: linear-gradient(180deg, #0D0D12 0%, #1A1A24 100%);
+        .site-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
+        .site-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
 
-        .contact-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .mobile-nav-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px; border-radius: 50%; border: none;
+            background: rgba(255,255,255,0.08); color: #9CA3AF;
+            cursor: pointer; touch-action: manipulation;
+            transition: background 0.2s, color 0.2s; flex-shrink: 0;
         }
+        .mobile-nav-btn:active { background: rgba(139,92,246,0.3); color: #fff; }
+        @media (hover: hover) { .mobile-nav-btn:hover { background: rgba(255,255,255,0.14); color: #fff; } }
+        [data-theme="light"] .mobile-nav-btn { background: rgba(0,0,0,0.07); color: #6B7280; }
+        [data-theme="light"] .mobile-nav-btn:active { background: rgba(139,92,246,0.2); color: #6D28D9; }
 
-        .contact-card:hover {
-            transform: translateY(-4px);
+        .theme-toggle {
+            display: flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; border-radius: 50%; border: none;
+            background: rgba(255,255,255,0.08); cursor: pointer;
+            transition: background 0.2s, color 0.2s; color: #9CA3AF; flex-shrink: 0;
         }
+        .theme-toggle:active { background: rgba(139,92,246,0.3); color: #fff; }
+        @media (hover: hover) { .theme-toggle:hover { background: rgba(255,255,255,0.14); color: #fff; } }
+        [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.07); color: #6B7280; }
+        [data-theme="light"] .theme-toggle:active { background: rgba(139,92,246,0.2); color: #6D28D9; }
+
+        .hamburger-icon { position: relative; width: 18px; height: 13px; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; }
+        .ham-line { display: block; width: 100%; height: 2px; background: currentColor; border-radius: 1px; transition: transform 0.25s ease, opacity 0.2s ease; transform-origin: center; }
+        .mobile-nav-btn.is-open .ham-top { transform: translateY(5.5px) rotate(45deg); }
+        .mobile-nav-btn.is-open .ham-mid { opacity: 0; transform: scaleX(0); }
+        .mobile-nav-btn.is-open .ham-bot { transform: translateY(-5.5px) rotate(-45deg); }
+
+        .mobile-nav-link { color: #ffffff; }
+        .mobile-nav-link:active { background: rgba(255,255,255,0.08); }
+        @media (hover: hover) { .mobile-nav-link:hover { background: rgba(255,255,255,0.05); color: #fff; } }
+        [data-theme="light"] .mobile-nav-link { color: #09090F; }
+        [data-theme="light"] .mobile-nav-link:active { background: rgba(0,0,0,0.06); }
+        @media (hover: hover) { [data-theme="light"] .mobile-nav-link:hover { background: rgba(0,0,0,0.04); color: #09090F; } }
+
+        #mobile-menu {
+            background: var(--nav-bg);
+            border: 1px solid var(--nav-border);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            opacity: 0; transform: translateY(-6px) scale(0.98);
+            pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        #mobile-menu.menu-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+        /* Nav logo */
+        [data-theme="light"] .nav-logo { transform: scale(1.3); }
+
+        /* Light mode text overrides */
+        [data-theme="light"] .text-white { color: var(--text-head) !important; }
+        [data-theme="light"] .hover\:text-white:hover { color: var(--text-head) !important; }
+        [data-theme="light"] .text-gray-400 { color: #4B5563 !important; }
+        [data-theme="light"] .text-gray-500 { color: #374151 !important; }
+        [data-theme="light"] .text-gray-600 { color: #6B7280 !important; }
+        [data-theme="light"] .bg-primary { color: #FFFFFF !important; }
+        [data-theme="light"] .text-purple-400 { color: #6D28D9 !important; }
+
+        .site-footer { background: #0A0A0F; }
+        [data-theme="light"] .site-footer { background: #F0F0F7; border-color: rgba(0,0,0,0.08) !important; }
+
+        *, *::before, *::after { transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease; }
     </style>
 </head>
 <body class="antialiased">
-    <nav class="fixed w-full backdrop-blur-md z-50 border-b border-dark-border" style="background-color: rgba(13, 13, 18, 0.8); left: 0; right: 0;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="./" class="flex items-center space-x-2 hover:opacity-80 transition">
-                    <img src="./photos/logo.svg" alt="Tivvity" class="w-8 h-8">
-                    <span class="text-xl font-bold text-white">Tivvity</span>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-2 md:px-4 pt-4">
+        <div class="nav-pill mx-auto pl-4 pr-2 py-1.5 grid md:flex md:items-center md:justify-between md:px-8 md:py-3.5 rounded-full" style="max-width:52rem;grid-template-columns:1fr auto 1fr;">
+            <a href="./" class="flex items-center gap-2 hover:opacity-80 transition justify-self-start">
+                <img src="./photos/logo.svg" alt="Tivvity" class="nav-logo w-5 h-5 md:w-8 md:h-8 object-contain theme-img" data-dark="./photos/logo.svg" data-light="./photos/logo-light.svg">
+                <span class="text-lg font-bold text-white tracking-tight">Tivvity</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="./" class="text-base text-gray-400 hover:text-white transition font-medium">Home</a>
+                <a href="./#faq" class="text-base text-gray-400 hover:text-white transition font-medium">FAQ</a>
+                <a href="https://apps.apple.com/us/app/tivvity-time-habit-tracker/id6755462279" target="_blank" rel="noopener noreferrer"
+                   class="bg-primary hover:bg-primary-dark text-white text-base font-semibold px-6 py-2.5 rounded-full transition">
+                    Download
                 </a>
-                <div class="flex items-center space-x-6">
-                    <a href="./#download" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-medium transition">Download</a>
-                </div>
+            </div>
+            <a href="https://apps.apple.com/us/app/tivvity-time-habit-tracker/id6755462279" target="_blank" rel="noopener noreferrer"
+               class="md:hidden inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-5 py-2 rounded-full transition justify-self-center"
+               style="box-shadow:0 4px 16px rgba(139,92,246,0.5);">
+                Download
+            </a>
+            <div class="flex md:hidden items-center gap-2 justify-self-end">
+                <button id="mobile-menu-btn" aria-label="Open menu" class="mobile-nav-btn">
+                    <span class="hamburger-icon">
+                        <span class="ham-line ham-top"></span>
+                        <span class="ham-line ham-mid"></span>
+                        <span class="ham-line ham-bot"></span>
+                    </span>
+                </button>
+                <button id="theme-toggle-mobile" class="theme-toggle" aria-label="Toggle theme">
+                    <svg id="icon-sun-mobile" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg id="icon-moon-mobile" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mx-auto mt-2 rounded-2xl overflow-hidden" style="max-width:52rem;">
+            <div class="px-3 py-3 flex flex-col gap-1">
+                <a href="./" class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium transition">Home</a>
+                <a href="./#faq" class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium transition">FAQ</a>
+                <a href="./privacy.html" class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium transition">Privacy</a>
             </div>
         </div>
     </nav>
 
-    <main class="hero-gradient pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+    <!-- Desktop theme toggle -->
+    <button id="theme-toggle" class="theme-toggle hidden md:flex" aria-label="Toggle theme" style="position:fixed;top:1.25rem;right:1.25rem;z-index:60;">
+        <svg id="icon-sun" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg id="icon-moon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+
+    <main class="pt-28 pb-20 px-4">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12">
-                <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">Contact Support</h1>
-                <p class="text-xl text-gray-400">We're here to help! Get in touch with us.</p>
+                <h1 class="text-4xl sm:text-5xl font-black text-white mb-4 tracking-tight">Contact Support</h1>
+                <p class="text-lg text-gray-400">We're here to help. Get in touch with us.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <!-- Email Support Card -->
-                <div class="contact-card bg-dark-card rounded-2xl shadow-2xl p-8 border-2 border-dark-border">
-                    <div class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="site-card rounded-2xl p-8">
+                    <div class="w-12 h-12 bg-primary/15 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-white mb-3">Email Support</h2>
-                    <p class="text-gray-300 mb-6">Send us an email and we'll get back to you as soon as possible.</p>
-                    <a href="mailto:support@tivvity.com" class="inline-flex items-center justify-center w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl font-semibold transition">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
+                    <h2 class="text-xl font-bold text-white mb-2">Email Support</h2>
+                    <p class="text-gray-400 text-sm mb-6">Send us an email and we'll get back to you as soon as possible.</p>
+                    <a href="mailto:support@tivvity.com" class="inline-flex items-center justify-center w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full font-semibold text-sm transition">
                         support@tivvity.com
                     </a>
                 </div>
 
-                <!-- FAQ Card -->
-                <div class="contact-card bg-dark-card rounded-2xl shadow-2xl p-8 border-2 border-dark-border">
-                    <div class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
+                <div class="site-card rounded-2xl p-8">
+                    <div class="w-12 h-12 bg-primary/15 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-white mb-3">Quick Help</h2>
-                    <p class="text-gray-300 mb-6">Looking for quick answers? Check out our common questions below.</p>
-                    <a href="#faq" class="inline-flex items-center justify-center w-full bg-dark-bg hover:bg-dark-border text-white px-6 py-3 rounded-xl font-semibold transition border-2 border-dark-border">
+                    <h2 class="text-xl font-bold text-white mb-2">Quick Help</h2>
+                    <p class="text-gray-400 text-sm mb-6">Check out our frequently asked questions below.</p>
+                    <a href="#faq" class="inline-flex items-center justify-center w-full border border-white/10 text-white px-6 py-3 rounded-full font-semibold text-sm transition hover:border-white/25">
                         View FAQ
                     </a>
                 </div>
             </div>
 
-            <!-- FAQ Section -->
-            <div id="faq" class="bg-dark-card rounded-3xl shadow-2xl p-8 sm:p-10 border-2 border-dark-border">
-                <h2 class="text-3xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
-                
+            <div id="faq" class="site-card rounded-3xl p-8 sm:p-10 mb-8">
+                <h2 class="text-2xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
                 <div class="space-y-6">
-                    <!-- FAQ Item 1 -->
-                    <div class="border-b border-dark-border pb-6">
-                        <h3 class="text-xl font-bold text-white mb-3">How do I manage my subscription?</h3>
-                        <p class="text-gray-300">You can manage your subscription through your device Settings > Apple ID > Subscriptions. From there, you can cancel, upgrade, or modify your subscription at any time.</p>
+                    <div class="border-b pb-6" style="border-color:rgba(255,255,255,0.06)">
+                        <h3 class="text-base font-semibold text-white mb-2">How do I manage my subscription?</h3>
+                        <p class="text-gray-400 text-sm">You can manage your subscription through your device Settings &gt; Apple ID &gt; Subscriptions. From there you can cancel, upgrade, or modify your subscription at any time.</p>
                     </div>
-
-                    <!-- FAQ Item 2 -->
-                    <div class="border-b border-dark-border pb-6">
-                        <h3 class="text-xl font-bold text-white mb-3">Is my data private and secure?</h3>
-                        <p class="text-gray-300">Yes! All your time tracking data is stored locally on your device. We don't collect or transmit your personal information to external servers. Read our <a href="./privacy" class="text-primary hover:text-primary-dark font-medium">Privacy Policy</a> for more details.</p>
+                    <div class="border-b pb-6" style="border-color:rgba(255,255,255,0.06)">
+                        <h3 class="text-base font-semibold text-white mb-2">Is my data private and secure?</h3>
+                        <p class="text-gray-400 text-sm">Yes! All your time tracking data is stored locally on your device. We don't collect or transmit your personal information to external servers. Read our <a href="./privacy.html" class="text-purple-400 hover:text-purple-300 font-medium">Privacy Policy</a> for more details.</p>
                     </div>
-
-                    <!-- FAQ Item 3 -->
-                    <div class="border-b border-dark-border pb-6">
-                        <h3 class="text-xl font-bold text-white mb-3">Can I export my data?</h3>
-                        <p class="text-gray-300">Yes! Pro users can export their time tracking data as a CSV or JSON file at any time. This gives you full control over your information.</p>
+                    <div class="border-b pb-6" style="border-color:rgba(255,255,255,0.06)">
+                        <h3 class="text-base font-semibold text-white mb-2">Can I export my data?</h3>
+                        <p class="text-gray-400 text-sm">Yes! Pro users can export their time tracking data as a CSV or JSON file at any time.</p>
                     </div>
-
-                    <!-- FAQ Item 4 -->
-                    <div class="border-b border-dark-border pb-6">
-                        <h3 class="text-xl font-bold text-white mb-3">What's the difference between the free and Pro versions?</h3>
-                        <p class="text-gray-300">The free version includes unlimited categories, activities, and current time period views. Pro features include historical views (Month, Year, All-time) for dashboard and goals pages as well as data export functionality.</p>
+                    <div class="border-b pb-6" style="border-color:rgba(255,255,255,0.06)">
+                        <h3 class="text-base font-semibold text-white mb-2">What's the difference between the free and Pro versions?</h3>
+                        <p class="text-gray-400 text-sm">The free version includes unlimited categories, activities, and current time period views. Pro adds historical views (Month, Year, All-time) for dashboard and goals, plus data export.</p>
                     </div>
-
-                    <!-- FAQ Item 5 -->
-                    <div class="border-b border-dark-border pb-6">
-                        <h3 class="text-xl font-bold text-white mb-3">How do I get a refund?</h3>
-                        <p class="text-gray-300">All purchases are processed through Apple. To request a refund, visit <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary-dark font-medium">reportaproblem.apple.com</a> and follow Apple's refund process.</p>
+                    <div class="border-b pb-6" style="border-color:rgba(255,255,255,0.06)">
+                        <h3 class="text-base font-semibold text-white mb-2">How do I get a refund?</h3>
+                        <p class="text-gray-400 text-sm">All purchases are processed through Apple. Visit <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 font-medium">reportaproblem.apple.com</a> and follow Apple's refund process.</p>
                     </div>
-
-                    <!-- FAQ Item 6 -->
-                    <div class="pb-6">
-                        <h3 class="text-xl font-bold text-white mb-3">I found a bug or have a feature request</h3>
-                        <p class="text-gray-300">We'd love to hear from you! Please email us at <a href="mailto:support@tivvity.com" class="text-primary hover:text-primary-dark font-medium">support@tivvity.com</a> with details about the bug or your feature idea.</p>
+                    <div>
+                        <h3 class="text-base font-semibold text-white mb-2">I found a bug or have a feature request</h3>
+                        <p class="text-gray-400 text-sm">We'd love to hear from you! Email us at <a href="mailto:support@tivvity.com" class="text-purple-400 hover:text-purple-300 font-medium">support@tivvity.com</a> with details.</p>
                     </div>
                 </div>
-
-                <div class="mt-10 pt-8 border-t border-dark-border text-center">
-                    <p class="text-gray-400 mb-4">Still have questions?</p>
-                    <a href="mailto:support@tivvity.com" class="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-xl font-semibold transition">
+                <div class="mt-8 pt-8 text-center" style="border-top:1px solid rgba(255,255,255,0.06)">
+                    <p class="text-gray-400 text-sm mb-4">Still have questions?</p>
+                    <a href="mailto:support@tivvity.com" class="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-full font-semibold text-sm transition">
                         Contact Support
                     </a>
                 </div>
             </div>
 
-            <div class="mt-10 text-center">
-                <a href="./" class="inline-flex items-center justify-center bg-dark-card hover:bg-dark-border text-white px-6 py-3 rounded-xl font-semibold transition border-2 border-dark-border">Back to home</a>
+            <div class="text-center">
+                <a href="./" class="inline-flex items-center justify-center text-gray-400 hover:text-white text-sm font-medium transition gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                    Back to home
+                </a>
             </div>
         </div>
     </main>
 
-    <footer class="bg-dark-bg border-t border-dark-border text-white py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2026 Tivvity. All rights reserved.</p>
+    <footer class="site-footer border-t px-4 py-12" style="border-color:rgba(255,255,255,0.05);">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2">
+                <img src="./photos/logo.svg" alt="Tivvity" class="nav-logo w-6 h-6 object-contain theme-img" data-dark="./photos/logo.svg" data-light="./photos/logo-light.svg">
+                <span class="text-sm font-bold text-white">Tivvity</span>
+                <span class="text-gray-700 text-sm ml-1">© 2026 Kirk Owens</span>
             </div>
+            <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-600">
+                <a href="./" class="hover:text-gray-300 transition">Home</a>
+                <a href="./privacy.html" class="hover:text-gray-300 transition">Privacy</a>
+                <a href="./terms.html" class="hover:text-gray-300 transition">Terms</a>
+                <a href="mailto:support@tivvity.com" class="hover:text-gray-300 transition">Email Us</a>
+            </nav>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                
-                if (href === '#') {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
+        const html            = document.documentElement;
+        const toggleBtn       = document.getElementById('theme-toggle');
+        const toggleBtnMobile = document.getElementById('theme-toggle-mobile');
+        const iconSun         = document.getElementById('icon-sun');
+        const iconMoon        = document.getElementById('icon-moon');
+        const iconSunMobile   = document.getElementById('icon-sun-mobile');
+        const iconMoonMobile  = document.getElementById('icon-moon-mobile');
+
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                html.setAttribute('data-theme', 'light');
+                iconSun.classList.add('hidden'); iconMoon.classList.remove('hidden');
+                iconSunMobile.classList.add('hidden'); iconMoonMobile.classList.remove('hidden');
+            } else {
+                html.removeAttribute('data-theme');
+                iconSun.classList.remove('hidden'); iconMoon.classList.add('hidden');
+                iconSunMobile.classList.remove('hidden'); iconMoonMobile.classList.add('hidden');
+            }
+            document.querySelectorAll('.theme-img').forEach(function(img) {
+                img.src = theme === 'light' ? img.dataset.light : img.dataset.dark;
+            });
+        }
+        function toggleTheme() {
+            const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            localStorage.setItem('tivvity-theme', next);
+            applyTheme(next);
+        }
+        toggleBtn.addEventListener('click', toggleTheme);
+        toggleBtnMobile.addEventListener('click', toggleTheme);
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu    = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.toggle('menu-open');
+            mobileMenuBtn.classList.toggle('is-open', isOpen);
+        });
+        document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('menu-open');
+                mobileMenuBtn.classList.remove('is-open');
             });
         });
+
+        const saved = localStorage.getItem('tivvity-theme');
+        if (saved) applyTheme(saved);
     </script>
 </body>
 </html>
