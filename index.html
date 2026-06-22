@@ -293,9 +293,11 @@
             transition: background 0.2s, color 0.2s;
             flex-shrink: 0;
         }
-        .mobile-nav-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+        .mobile-nav-btn:active { background: rgba(255,255,255,0.14); color: #fff; }
+        @media (hover: hover) { .mobile-nav-btn:hover { background: rgba(255,255,255,0.14); color: #fff; } }
         [data-theme="light"] .mobile-nav-btn { background: rgba(0,0,0,0.07); color: #6B7280; }
-        [data-theme="light"] .mobile-nav-btn:hover { background: rgba(0,0,0,0.12); color: #09090F; }
+        [data-theme="light"] .mobile-nav-btn:active { background: rgba(0,0,0,0.12); color: #09090F; }
+        @media (hover: hover) { [data-theme="light"] .mobile-nav-btn:hover { background: rgba(0,0,0,0.12); color: #09090F; } }
         .mobile-nav-link:hover { background: rgba(255,255,255,0.05); }
         [data-theme="light"] .mobile-nav-link:hover { background: rgba(0,0,0,0.04); }
 
@@ -314,9 +316,11 @@
             color: #9CA3AF;
             flex-shrink: 0;
         }
-        .theme-toggle:hover { background: rgba(255,255,255,0.14); color: #fff; }
+        .theme-toggle:active { background: rgba(255,255,255,0.14); color: #fff; }
+        @media (hover: hover) { .theme-toggle:hover { background: rgba(255,255,255,0.14); color: #fff; } }
         [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.07); color: #6B7280; }
-        [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.12); color: #09090F; }
+        [data-theme="light"] .theme-toggle:active { background: rgba(0,0,0,0.12); color: #09090F; }
+        @media (hover: hover) { [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.12); color: #09090F; } }
 
         /* ──── Theme transition ──── */
         *, *::before, *::after { transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease; }
