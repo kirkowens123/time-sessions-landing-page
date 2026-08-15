@@ -324,6 +324,40 @@
         [data-theme="light"] .review-bubble::after { border-top-color: #ffffff; }
         [data-theme="light"] .review-bubble .review-title { color: #09090F; }
 
+        /* ──── Reviews carousel ──── */
+        .reviews-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding-bottom: 0.5rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .reviews-track::-webkit-scrollbar { display: none; }
+        .review-slide {
+            scroll-snap-align: start;
+            flex: 0 0 82%;
+        }
+        @media (min-width: 640px) { .review-slide { flex-basis: calc(50% - 0.75rem); } }
+        @media (min-width: 1024px) { .review-slide { flex-basis: calc(33.333% - 1rem); } }
+        .reviews-arrow {
+            position: absolute; top: 40%; transform: translateY(-50%);
+            width: 40px; height: 40px; border-radius: 9999px;
+            display: none; align-items: center; justify-content: center;
+            background: var(--modal-bg); border: 1px solid var(--modal-bdr);
+            color: var(--text-head); z-index: 10; transition: opacity 0.2s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        @media (min-width: 1024px) { .reviews-arrow { display: flex; } }
+        .reviews-arrow:disabled { opacity: 0.35; cursor: default; }
+        .reviews-dot {
+            width: 8px; height: 8px; border-radius: 9999px;
+            background: rgba(139,92,246,0.25); transition: all 0.25s ease;
+        }
+        .reviews-dot.active { background: #8B5CF6; width: 22px; }
+
         /* ──── Mobile nav button ──── */
         .mobile-nav-btn {
             display: flex;
@@ -563,61 +597,15 @@
                 <h2 class="text-4xl sm:text-5xl font-bold text-white tracking-tight">What our users say.</h2>
             </div>
 
-            <div class="grid sm:grid-cols-3 gap-8 items-start">
-                <!-- Review 1 -->
-                <div>
-                    <div class="review-bubble">
-                        <div class="flex gap-0.5 mb-3">
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                        </div>
-                        <p class="review-title text-sm font-bold text-white mb-2">Best Activity Dashboards!!</p>
-                        <p class="text-sm text-gray-400 leading-relaxed">"I kept telling myself I'd 'be more productive' without actually doing anything about it. Tracking my habits always felt like a chore, until this. The dashboard is genuinely the reason I keep coming back."</p>
-                    </div>
-                    <div class="flex items-center gap-2.5 mt-4 pl-1">
-                        <div class="w-8 h-8 rounded-full bg-purple-700 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">C</div>
-                        <span class="text-xs text-gray-500">Ccllaaiire · Mar 12</span>
-                    </div>
-                </div>
-                <!-- Review 2 -->
-                <div>
-                    <div class="review-bubble">
-                        <div class="flex gap-0.5 mb-3">
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                        </div>
-                        <p class="review-title text-sm font-bold text-white mb-2">After a month, it changed everything</p>
-                        <p class="text-sm text-gray-400 leading-relaxed">"After a month, it completely changed how I see my day. When you start logging time, you notice patterns and can do something about them."</p>
-                    </div>
-                    <div class="flex items-center gap-2.5 mt-4 pl-1">
-                        <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">F</div>
-                        <span class="text-xs text-gray-500">fanj16 · Apr 5</span>
-                    </div>
-                </div>
-                <!-- Review 3 -->
-                <div>
-                    <div class="review-bubble">
-                        <div class="flex gap-0.5 mb-3">
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                            <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>
-                        </div>
-                        <p class="review-title text-sm font-bold text-white mb-2">Finally feeling accomplished</p>
-                        <p class="text-sm text-gray-400 leading-relaxed">"My day was so amazing because I was able to track my appts, tasks completed &amp; goals met. I'm feeling very accomplished by time &amp; habit tracking my day. I'm very motivated to finish my tasks."</p>
-                    </div>
-                    <div class="flex items-center gap-2.5 mt-4 pl-1">
-                        <div class="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">P</div>
-                        <span class="text-xs text-gray-500">Prayer Warrior for Christ · Mar 21</span>
-                    </div>
-                </div>
+            <div class="relative fade-in">
+                <button id="reviews-prev" class="reviews-arrow" aria-label="Previous reviews" style="left:-20px;">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button id="reviews-next" class="reviews-arrow" aria-label="Next reviews" style="right:-20px;">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+                <div id="reviews-track" class="reviews-track"></div>
+                <div id="reviews-dots" class="flex justify-center items-center gap-2 mt-6"></div>
             </div>
         </div>
     </section>
@@ -956,6 +944,70 @@
         </div>
     </div>
 
+    <!-- Floating trigger to reopen the 50% off offer -->
+    <button id="promo-trigger" type="button" aria-label="Open 50% off founder offer"
+        class="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white pl-4 pr-5 py-3 rounded-full font-semibold text-sm shadow-lg transition"
+        style="box-shadow:0 8px 32px rgba(139,92,246,0.45);">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+        </svg>
+        50% Off
+    </button>
+
+    <!-- 50% Off Promo Popup -->
+    <div id="promo-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="modal-panel rounded-3xl max-w-md w-full p-8 relative overflow-hidden" style="background:#13131A;border:1px solid rgba(255,255,255,0.08);">
+            <div class="glow-blob" style="width:220px;height:220px;background:rgba(139,92,246,0.35);top:-90px;right:-70px;"></div>
+
+            <button id="promo-close" class="absolute top-4 right-4 text-gray-500 hover:text-white transition z-10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div class="relative">
+                <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-3 py-1 mb-4">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    <span class="text-purple-400 text-xs font-semibold tracking-wide uppercase">Limited Lifetime Offer</span>
+                </div>
+
+                <h3 class="text-3xl font-extrabold text-white mb-1 leading-tight">
+                    <span class="gradient-text">50% OFF</span> Tivvity Pro Lifetime
+                </h3>
+                <p class="text-gray-500 text-sm mb-5">One-time purchase, yours forever. No subscription. Exclusive for the <span class="text-purple-400 font-semibold">first 100 Tivvity Pro users</span>. Lock in half off before the spots run out.</p>
+
+                <div class="bg-primary/10 border border-primary/20 rounded-xl p-4 mb-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-white text-sm font-semibold">Spots claimed</span>
+                        <span class="text-sm"><span class="text-purple-400 font-bold">6</span><span class="text-gray-500">/100</span></span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                        <div class="h-full rounded-full bg-primary" style="width:6%;"></div>
+                    </div>
+                </div>
+
+                <p class="text-gray-500 text-xs mb-2">Use this code on the lifetime purchase in the Tivvity app:</p>
+                <button id="promo-copy" type="button" class="group w-full flex items-center justify-between gap-3 rounded-xl px-4 py-3 mb-3 transition" style="background:#0A0A0F;border:1px dashed rgba(139,92,246,0.5);">
+                    <span class="text-white font-bold tracking-widest text-lg">FOUNDER100</span>
+                    <span id="promo-copy-label" class="inline-flex items-center gap-1.5 text-purple-400 text-xs font-semibold uppercase tracking-wide">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                        Copy
+                    </span>
+                </button>
+                <ol class="text-gray-600 text-xs mb-4 leading-relaxed space-y-1 list-decimal list-inside">
+                    <li>Open the Tivvity paywall.</li>
+                    <li>Scroll to the bottom of the paywall.</li>
+                    <li>Tap <span class="text-purple-400 font-semibold">Redeem Code</span>.</li>
+                    <li>Enter the founder code you copied (<span class="text-purple-400 font-semibold">FOUNDER100</span>).</li>
+                    <li>Tap <span class="text-purple-400 font-semibold">Redeem</span> to get 50% off your lifetime purchase.</li>
+                </ol>
+                <button id="promo-dismiss" class="w-full text-gray-600 hover:text-gray-400 text-xs transition">No thanks, I'll pay full price</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         /* ── Theme toggle ── */
         const html            = document.documentElement;
@@ -1078,6 +1130,134 @@
             document.getElementById('beta-form-state').classList.remove('hidden');
             closeBetaModal();
         });
+
+        /* ── 50% Off promo popup ── */
+        (function() {
+            const promoModal = document.getElementById('promo-modal');
+            if (!promoModal) return;
+
+            function openPromo() {
+                promoModal.classList.remove('hidden');
+                promoModal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+            function closePromo() {
+                promoModal.classList.add('hidden');
+                promoModal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+                localStorage.setItem('tivvity-promo-seen', '1');
+            }
+
+            document.getElementById('promo-close').addEventListener('click', closePromo);
+            document.getElementById('promo-dismiss').addEventListener('click', closePromo);
+
+            /* Copy promo code to clipboard */
+            const copyBtn   = document.getElementById('promo-copy');
+            const copyLabel = document.getElementById('promo-copy-label');
+            copyBtn.addEventListener('click', async function() {
+                const original = copyLabel.innerHTML;
+                try {
+                    await navigator.clipboard.writeText('FOUNDER100');
+                } catch (err) {
+                    /* Fallback for older browsers / insecure contexts */
+                    const tmp = document.createElement('textarea');
+                    tmp.value = 'FOUNDER100';
+                    tmp.style.position = 'fixed';
+                    tmp.style.opacity = '0';
+                    document.body.appendChild(tmp);
+                    tmp.select();
+                    try { document.execCommand('copy'); } catch (e) {}
+                    document.body.removeChild(tmp);
+                }
+                copyLabel.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Copied!';
+                clearTimeout(copyBtn._t);
+                copyBtn._t = setTimeout(function() { copyLabel.innerHTML = original; }, 2000);
+            });
+
+            promoModal.addEventListener('click', function(e) {
+                if (e.target === this) closePromo();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && promoModal.classList.contains('flex')) closePromo();
+            });
+
+            /* Auto-show once per visitor, a few seconds after landing */
+            if (!localStorage.getItem('tivvity-promo-seen')) {
+                setTimeout(openPromo, 4000);
+            }
+
+            /* Persistent trigger so users can reopen the offer any time */
+            const promoTrigger = document.getElementById('promo-trigger');
+            if (promoTrigger) promoTrigger.addEventListener('click', openPromo);
+        })();
+
+        /* ── Reviews carousel ── */
+        (function() {
+            const track = document.getElementById('reviews-track');
+            if (!track) return;
+
+            const reviews = [
+                { title: 'Best Activity Dashboards!!', body: 'I kept telling myself I\u2019d \u2018be more productive\u2019 without actually doing anything about it. Tracking my habits always felt like a chore, until this. The dashboard is genuinely the reason I keep coming back.', name: 'Ccllaaiire', date: 'Mar 12', letter: 'C', color: 'bg-purple-700' },
+                { title: 'Awesome', body: 'Helped me finally get a routine going. I never used to keep track of how my time was spent, now I have an easy way to log my activities to help optimize my life and focus on my priorities.', name: 'SkaterGary', date: 'Jul 25', letter: 'S', color: 'bg-blue-600' },
+                { title: 'Useful Tool', body: 'This app helped me prioritize my goal of separating my work life from my personal life, it\u2019s important to physically see where all your time goes so that the important changes can be made to achieve a healthier lifestyle.', name: 'Kiao.Ken', date: 'Aug 4', letter: 'K', color: 'bg-indigo-600' },
+                { title: 'The best personal time tracker', body: 'I\u2019ve been using Tivvity to track my workouts, work, and personal projects. I like seeing where my time actually goes, and the dashboard makes it easy to spot patterns. The app was easy to setup and I\u2019ve enjoyed using it.', name: 'Hat_c45', date: 'Aug 2', letter: 'H', color: 'bg-teal-600' },
+                { title: 'Useful and Easy to Understand!', body: 'This app is really useful for tracking goals and the interface is easy to navigate. You can schedule your week ahead of time, record events live, or retroactively enter your time with just a few taps.', name: 'Sk8 Engineer', date: 'Jul 25', letter: 'S', color: 'bg-rose-600' },
+                { title: 'Finally feeling accomplished', body: 'My day was so amazing because I was able to track my appts, tasks completed & goals met. I\u2019m feeling very accomplished by time & habit tracking my day. I\u2019m very motivated to finish my tasks.', name: 'Prayer Warrior for Christ', date: 'Mar 21', letter: 'P', color: 'bg-emerald-600' }
+            ];
+
+            const STAR = '<svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.967z"/></svg>';
+            const esc = function(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+
+            track.innerHTML = reviews.map(function(r) {
+                return '<div class="review-slide">' +
+                    '<div class="review-bubble">' +
+                        '<div class="flex gap-0.5 mb-3">' + STAR.repeat(5) + '</div>' +
+                        '<p class="review-title text-sm font-bold text-white mb-2">' + esc(r.title) + '</p>' +
+                        '<p class="text-sm text-gray-400 leading-relaxed">\u201C' + esc(r.body) + '\u201D</p>' +
+                    '</div>' +
+                    '<div class="flex items-center gap-2.5 mt-4 pl-1">' +
+                        '<div class="w-8 h-8 rounded-full ' + r.color + ' flex items-center justify-center text-white text-xs font-bold flex-shrink-0">' + r.letter + '</div>' +
+                        '<span class="text-xs text-gray-500">' + esc(r.name) + ' \u00B7 ' + r.date + '</span>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            const prevBtn = document.getElementById('reviews-prev');
+            const nextBtn = document.getElementById('reviews-next');
+            const dotsWrap = document.getElementById('reviews-dots');
+
+            function slideStep() {
+                const first = track.querySelector('.review-slide');
+                if (!first) return track.clientWidth;
+                return first.getBoundingClientRect().width + 24; /* card + gap */
+            }
+
+            /* Dots — one per card */
+            reviews.forEach(function(_, i) {
+                const dot = document.createElement('button');
+                dot.className = 'reviews-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to review ' + (i + 1));
+                dot.addEventListener('click', function() { track.scrollTo({ left: slideStep() * i, behavior: 'smooth' }); });
+                dotsWrap.appendChild(dot);
+            });
+            const dots = Array.from(dotsWrap.children);
+
+            function update() {
+                const idx = Math.round(track.scrollLeft / slideStep());
+                dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+                if (prevBtn) prevBtn.disabled = track.scrollLeft < 4;
+                if (nextBtn) nextBtn.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+            }
+
+            function visibleCount() { return Math.max(1, Math.round(track.clientWidth / slideStep())); }
+            if (prevBtn) prevBtn.addEventListener('click', function() { track.scrollBy({ left: -slideStep() * visibleCount(), behavior: 'smooth' }); });
+            if (nextBtn) nextBtn.addEventListener('click', function() { track.scrollBy({ left: slideStep() * visibleCount(), behavior: 'smooth' }); });
+
+            let raf;
+            track.addEventListener('scroll', function() { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); });
+            window.addEventListener('resize', update);
+            update();
+        })();
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
