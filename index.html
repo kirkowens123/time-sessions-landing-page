@@ -1232,26 +1232,36 @@
                 return first.getBoundingClientRect().width + 24; /* card + gap */
             }
 
-            /* Dots — one per card */
-            reviews.forEach(function(_, i) {
-                const dot = document.createElement('button');
-                dot.className = 'reviews-dot' + (i === 0 ? ' active' : '');
-                dot.setAttribute('aria-label', 'Go to review ' + (i + 1));
-                dot.addEventListener('click', function() { track.scrollTo({ left: slideStep() * i, behavior: 'smooth' }); });
-                dotsWrap.appendChild(dot);
-            });
-            const dots = Array.from(dotsWrap.children);
+            function visibleCount() { return Math.max(1, Math.round(track.clientWidth / slideStep())); }
+            function pageStep() { return slideStep() * visibleCount(); }
+            function pageCount() { return Math.ceil(reviews.length / visibleCount()); }
+
+            /* Dots — one per page (page = the set of cards visible at once) */
+            let lastPages = -1;
+            function buildDots() {
+                const pages = pageCount();
+                if (pages === lastPages) return;
+                lastPages = pages;
+                dotsWrap.innerHTML = '';
+                for (let i = 0; i < pages; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'reviews-dot';
+                    dot.setAttribute('aria-label', 'Go to page ' + (i + 1));
+                    dot.addEventListener('click', function() { track.scrollTo({ left: pageStep() * i, behavior: 'smooth' }); });
+                    dotsWrap.appendChild(dot);
+                }
+            }
 
             function update() {
-                const idx = Math.round(track.scrollLeft / slideStep());
-                dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+                buildDots();
+                const page = Math.round(track.scrollLeft / pageStep());
+                Array.from(dotsWrap.children).forEach(function(d, i) { d.classList.toggle('active', i === page); });
                 if (prevBtn) prevBtn.disabled = track.scrollLeft < 4;
                 if (nextBtn) nextBtn.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
             }
 
-            function visibleCount() { return Math.max(1, Math.round(track.clientWidth / slideStep())); }
-            if (prevBtn) prevBtn.addEventListener('click', function() { track.scrollBy({ left: -slideStep() * visibleCount(), behavior: 'smooth' }); });
-            if (nextBtn) nextBtn.addEventListener('click', function() { track.scrollBy({ left: slideStep() * visibleCount(), behavior: 'smooth' }); });
+            if (prevBtn) prevBtn.addEventListener('click', function() { track.scrollBy({ left: -pageStep(), behavior: 'smooth' }); });
+            if (nextBtn) nextBtn.addEventListener('click', function() { track.scrollBy({ left: pageStep(), behavior: 'smooth' }); });
 
             let raf;
             track.addEventListener('scroll', function() { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); });
