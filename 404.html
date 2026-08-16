@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | Tivvity</title>
+    <meta name="description" content="The page you are looking for could not be found. Head back to Tivvity, the personal time tracking app.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" type="image/png" href="./photos/favicon.png">
+    <link rel="apple-touch-icon" href="./photos/favicon.png">
+    <script>
+        (function(){var t=localStorage.getItem('tivvity-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');})();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B5CF6',
+                        'primary-dark': '#7C3AED',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        :root {
+            --bg:        #0A0A0F;
+            --text-head: #FFFFFF;
+            --text-body: #9CA3AF;
+            --text-mute: #6B7280;
+        }
+        [data-theme="light"] {
+            --bg:        #F7F7FB;
+            --text-head: #09090F;
+            --text-body: #4B5563;
+            --text-mute: #6B7280;
+        }
+        html, body { background-color: var(--bg) !important; }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 50%, #C4B5FD 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glow-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+        .head-text { color: var(--text-head); }
+        .body-text { color: var(--text-body); }
+        .mute-text { color: var(--text-mute); }
+    </style>
+</head>
+<body class="antialiased">
+    <main class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+        <!-- Background glow -->
+        <div class="glow-blob w-96 h-96 bg-purple-700 opacity-20" style="top:-60px;left:50%;transform:translateX(-50%);"></div>
+
+        <div class="relative z-10 max-w-lg mx-auto">
+            <!-- Branding -->
+            <a href="/" class="inline-flex items-center gap-2 mb-10 hover:opacity-80 transition">
+                <img src="./photos/logo.svg" alt="Tivvity" class="w-8 h-8 object-contain theme-img" data-dark="./photos/logo.svg" data-light="./photos/logo-light.svg">
+                <span class="text-xl font-bold head-text tracking-tight">Tivvity</span>
+            </a>
+
+            <h1 class="text-7xl sm:text-8xl font-black tracking-tight mb-4">
+                <span class="gradient-text">404</span>
+            </h1>
+            <p class="text-2xl sm:text-3xl font-bold head-text mb-4">Page not found</p>
+            <p class="body-text text-base sm:text-lg leading-relaxed mb-10">
+                The page you are looking for doesn't exist or may have moved.
+            </p>
+
+            <a href="/" class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white px-7 py-3.5 rounded-full font-semibold text-sm transition shadow-lg"
+               style="box-shadow:0 8px 32px rgba(139,92,246,0.4);">
+                Back to homepage
+            </a>
+        </div>
+    </main>
+
+    <script>
+        /* Apply saved theme to logo image */
+        (function(){
+            var theme = localStorage.getItem('tivvity-theme') === 'light' ? 'light' : 'dark';
+            document.querySelectorAll('.theme-img').forEach(function(img){
+                img.src = theme === 'light' ? img.dataset.light : img.dataset.dark;
+            });
+        })();
+    </script>
+</body>
+</html>
