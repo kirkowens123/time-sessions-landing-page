@@ -1027,7 +1027,7 @@
 
     <!-- 50% Off Promo Popup -->
     <div id="promo-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="modal-panel rounded-3xl max-w-md w-full p-8 relative overflow-hidden" style="background:#13131A;border:1px solid rgba(255,255,255,0.08);">
+        <div class="modal-panel rounded-3xl max-w-md w-full p-6 sm:p-8 relative overflow-y-auto overflow-x-hidden overscroll-contain max-h-[calc(100dvh-2rem)]" style="background:#13131A;border:1px solid rgba(255,255,255,0.08);">
             <div class="glow-blob" style="width:220px;height:220px;background:rgba(139,92,246,0.35);top:-90px;right:-70px;"></div>
 
             <button id="promo-close" class="absolute top-4 right-4 text-gray-500 hover:text-white transition z-10">
@@ -1037,40 +1037,32 @@
             </button>
 
             <div class="relative">
-                <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-3 py-1 mb-4">
+                <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-3 py-1 mb-3">
                     <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                     <span class="text-purple-400 text-xs font-semibold tracking-wide uppercase">Limited Lifetime Offer</span>
                 </div>
 
-                <h3 class="text-3xl font-extrabold text-white mb-1 leading-tight">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-1 leading-tight">
                     <span class="gradient-text">50% OFF</span> Tivvity Pro Lifetime
                 </h3>
-                <p class="text-gray-500 text-sm mb-5">One-time purchase, yours forever. No subscription. Lock in half off before this offer <span class="text-purple-400 font-semibold">expires August 31</span>.</p>
+                <p class="text-gray-500 text-sm mb-4">One-time purchase, yours forever. No subscription. Lock in half off before this offer <span class="text-purple-400 font-semibold">expires August 31</span>.</p>
 
-                <div class="bg-primary/10 border border-primary/20 rounded-xl p-4 mb-5">
-                    <div class="flex items-center justify-between">
-                        <span class="text-white text-sm font-semibold"><span class="text-purple-400 font-bold">50+</span> people already claimed</span>
-                        <span class="inline-flex items-center gap-1.5 text-purple-400 text-xs font-semibold uppercase tracking-wide">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Ends Aug 31
-                        </span>
-                    </div>
+                <div class="bg-primary/10 border border-primary/20 rounded-xl p-3 mb-4 text-center">
+                    <span class="text-white text-sm font-semibold"><span class="text-purple-400 font-bold">50+</span> people already claimed</span>
                 </div>
 
-                <p class="text-gray-500 text-xs mb-2">Use this code on the lifetime purchase in the Tivvity app:</p>
-                <div class="w-full flex items-center justify-center gap-3 rounded-xl px-4 py-3 mb-3" style="background:#0A0A0F;border:1px dashed rgba(139,92,246,0.5);">
+                <p class="text-gray-500 text-xs mb-2">Use this code in the app:</p>
+                <div class="w-full flex items-center justify-center gap-3 rounded-xl px-4 py-2.5 mb-3" style="background:#0A0A0F;border:1px dashed rgba(139,92,246,0.5);">
                     <span class="text-white font-bold tracking-widest text-lg">FOUNDER100</span>
                 </div>
-                <ol class="text-gray-600 text-xs mb-4 leading-relaxed space-y-1 list-decimal list-inside">
+                <ol class="text-gray-600 text-xs mb-4 leading-snug space-y-0.5 list-decimal list-inside">
                     <li>Open the Tivvity paywall.</li>
                     <li>Scroll to the bottom of the paywall.</li>
                     <li>Tap <span class="text-purple-400 font-semibold">Redeem Code</span>.</li>
                     <li>Enter the founder code you copied (<span class="text-purple-400 font-semibold">FOUNDER100</span>).</li>
                     <li>Tap <span class="text-purple-400 font-semibold">Redeem</span> to get 50% off your lifetime purchase.</li>
                 </ol>
-                <button id="promo-copy" type="button" class="w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full font-semibold text-sm transition mb-3">
+                <button id="promo-copy" type="button" class="w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full font-semibold text-sm transition mb-2">
                     <span id="promo-copy-label" class="inline-flex items-center gap-1.5 uppercase tracking-wide">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
@@ -1211,15 +1203,28 @@
             const promoModal = document.getElementById('promo-modal');
             if (!promoModal) return;
 
+            let savedScrollY = 0;
             function openPromo() {
                 promoModal.classList.remove('hidden');
                 promoModal.classList.add('flex');
-                document.body.style.overflow = 'hidden';
+                /* Lock background scroll (works on iOS Safari too) */
+                savedScrollY = window.scrollY;
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${savedScrollY}px`;
+                document.body.style.left = '0';
+                document.body.style.right = '0';
+                document.body.style.width = '100%';
             }
             function closePromo() {
                 promoModal.classList.add('hidden');
                 promoModal.classList.remove('flex');
-                document.body.style.overflow = 'auto';
+                /* Restore background scroll */
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
+                document.body.style.width = '';
+                window.scrollTo(0, savedScrollY);
                 localStorage.setItem('tivvity-promo-seen', '1');
             }
 
